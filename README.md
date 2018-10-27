@@ -13,14 +13,14 @@ think of this file as the entry point of the web application.
 ### views Folder
 this is where all your mark up files (i.e. HTML/EJS) are going to be held
 
-#### includes
-think of this subfolder as different components of HTML, usually includes reusable components, such as header, footer, nav
+  #### includes
+  think of this subfolder as different components of HTML, usually includes reusable components, such as       header, footer, nav
 
-#### pages
-think of this subfolder as different pages of your website
+  #### pages
+  think of this subfolder as different pages of your website
 
-#### index.ejs
-this is the entry point of your home page (different from app.js, which is for server side entry)
+  #### index.ejs
+  this is the entry point of your home page (different from app.js, which is for server side entry)
 
 ### public Folder
 this is where all the stylesheets, js, bootstrap should be held
@@ -54,12 +54,10 @@ can be run because of the script
 * this is for connection to mongodb
 
 2. Install node packages
-<br>run
 ```
-npm install
+run npm install
 ```
 3. Launch server
-run
 ```
-npm start
+run npm start
 ```
