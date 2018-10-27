@@ -55,9 +55,9 @@ can be run because of the script
 
 2. Install node packages
 ```
-run npm install
+run "npm install"
 ```
 3. Launch server
 ```
-run npm start
+run "npm start"
 ```
