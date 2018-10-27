@@ -1,0 +1,21 @@
+{
+  "name": "wecook",
+  "version": "1.0.0",
+  "description": "wecook web app for cogs 120",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kaung Yang, Andrew Or, Mingbin Li",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.7",
+    "passport": "^0.4.0",
+    "passport-local-mongoose": "^5.0.1",
+    "path": "^0.12.7"
+  }
+}

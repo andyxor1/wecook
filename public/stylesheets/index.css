@@ -1,0 +1,127 @@
+.applications-nav {
+  font-size: 15px;
+}
+.applications-nav .title{
+  color: #006A96
+}
+.applications-nav img {
+  width: 75px;
+}
+.applications-nav .border-right {
+  border-right: 2px solid #dbdbdb !important;
+}
+
+.applications-nav nav {
+  border-bottom: 2px solid #006A96;
+}
+
+.yse-applications {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+
+.yse-applications .nav-link {
+  font-size: 18px;
+  padding: 15px;
+}
+
+.yse-applications .container {
+  padding: 30px;
+  /* border: 2px dashed grey; */
+  border-radius: 5px;
+  margin-top: 30px;
+  box-shadow: 0 0 5px #CCC;
+  background-color: #FFF;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.applications-nav .icon {
+  font-size: 30px;
+  vertical-align: middle;
+}
+
+body {
+  height: 100%;
+  background-color: #f1f1f1;
+}
+
+.index .login-card {
+  width: 100%;
+}
+
+.index .login-card .login{
+  background-color: #e3f0fd;
+  border: none;
+}
+
+.index .login-card .icon {
+  font-size: 20px;
+}
+
+.index .jumbotron {
+  border-radius: 15px;
+  text-align: center;
+  margin-top: 25px;
+  background-color: #b9d8fd;
+  color: #1c599f;
+}
+
+/* .index .jumbotron {
+
+} */
+
+.index .card {
+  border-radius: 15px;
+}
+
+.index .jumbotron img {
+  width: 150px;
+}
+
+.login-card .label-div {
+  display: inline-block;
+}
+
+
+.questionbox-card {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: #ffeeee;
+  border: none;
+}
+
+.questionbox-card i {
+  font-size: 20px;
+}
+
+.error-page .jumbotron {
+  border-radius: 15px;
+  text-align: center;
+}
+
+.footer-container {
+  background-color: #4f81bd;
+}
+
+.footer-container .container .row {
+  padding: 30px 0;
+}
+
+.footer-container .icon {
+  font-size: 50px;
+  color: white;
+}
+
+.footer-container ul {
+  padding: 0;
+}
+
+.footer-container ul li {
+  list-style: none;
+}
+
+.footer-container ul li > a {
+  float: left;
+}
