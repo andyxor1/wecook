@@ -100,6 +100,9 @@ body {
   border-radius: 15px;
   text-align: center;
 }
+footer {
+    box-shadow: 0 50vh 0 50vh #4f81bd;
+}
 
 .footer-container {
   background-color: #4f81bd;
