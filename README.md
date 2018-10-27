@@ -54,7 +54,7 @@ can be run because of the script
 * this is for connection to mongodb
 
 2. Install node packages
-run
+<br>run
 ```
 npm install
 ```
