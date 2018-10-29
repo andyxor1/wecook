@@ -12,6 +12,11 @@ router.get('/share', function ( req, res, next ) {
     res.render('pages/share_recipe');
 });
 
+router.get('/account', function ( req, res, next ) {
+    res.render('pages/account');
+});
+
+
 
 
 module.exports = router;
