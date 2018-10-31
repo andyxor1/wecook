@@ -16,6 +16,10 @@ router.get('/account', function ( req, res, next ) {
     res.render('pages/account');
 });
 
+router.get('/about', function ( req, res, next ) {
+    res.render('pages/about');
+});
+
 
 
 

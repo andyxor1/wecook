@@ -48,6 +48,11 @@ can be run because of the script
 * passport
 * passport-local-mongoose
 
+to install these packages, execute this: 
+
+```npm install --save <package name 1> <package name 2> ... <package name n> (i.e npm install --save ejs path)
+```
+
 
 ## Installing/Running app
 1. Download Robo 3T https://robomongo.org/
