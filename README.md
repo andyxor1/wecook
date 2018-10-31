@@ -2,9 +2,17 @@
 
 ## Checklist
 - node installed?
-** check with node -v
-- npm installed (should be installed with node)
-** check with npm -v
+** check with 
+```
+node -v
+```
+
+- npm installed? (should be installed with node)
+** check with
+```npm -v
+```
+- (optional) have nodemon? 
+** check with ...uh.. google how to install nodemon
 
 ## File/Folder explained:
 ### app.js File
