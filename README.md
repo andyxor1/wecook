@@ -6,10 +6,10 @@
 ```
 node -v
 ```
-
 - npm installed? (should be installed with node)
 ** check with
-```npm -v
+```
+npm -v
 ```
 - (optional) have nodemon? 
 ** check with ...uh.. google how to install nodemon
@@ -58,7 +58,8 @@ can be run because of the script
 
 to install these packages, execute this: 
 
-```npm install --save <package name 1> <package name 2> ... <package name n> (i.e npm install --save ejs path)
+```
+npm install --save <package name 1> <package name 2> ... <package name n> (i.e npm install --save ejs path)
 ```
 
 
