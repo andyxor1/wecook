@@ -20,7 +20,13 @@ router.get('/about', function ( req, res, next ) {
     res.render('pages/about');
 });
 
+router.get('/dashboard', function ( req, res, next ) {
+    res.render('pages/dashboard');
+});
 
+router.get('/settings', function ( req, res, next ) {
+    res.render('pages/settings');
+});
 
 
 module.exports = router;
