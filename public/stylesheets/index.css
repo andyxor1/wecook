@@ -1,8 +1,48 @@
+.sidebar_div {
+  background-color: #ccc;
+  padding: 20px;
+  padding-top: 50px;
+  height: 100%;
+}
+
+
+.recipe_preview img {
+  width: 100%;
+}
+.recipe_preview .icon {
+  vertical-align: middle;
+}
+.recipe_preview .tags {
+  border: 1px solid grey;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.font-10 {
+  font-size: 10px;
+}
+.font-20 {
+  font-size: 20px;
+}
+.font-25 {
+  font-size: 25px;
+}
+.font-30 {
+  font-size: 40px;
+}
+.font-40 {
+  font-size: 40px;
+}
+
+
+
+
 .applications-nav {
   font-size: 15px;
 }
 .applications-nav .title{
-  color: #006A96
+  color: #006A96;
+  font-size: 50px;
 }
 .applications-nav img {
   width: 75px;
@@ -45,6 +85,10 @@
 body {
   height: 100%;
   background-color: #f1f1f1;
+}
+
+html {
+  height: 100%;
 }
 
 .index .login-card {
