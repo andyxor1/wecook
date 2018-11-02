@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <div class="card questionbox-card text-info">
+    <div class="card questionbox-card text-dark">
       <div class="card-body">
         <h1 class="card-title text-info"> Share your recipe ...</h1>
         <h6 class="card-subtitle mb-2 text-muted mb-4 font-italic"> your recipe could help a hungry student...</h6>
@@ -8,24 +8,81 @@
           <div class="form-group">
             <span> <i class="icon fas fa-feather-alt mr-3"></i>  </span>
             <label for="exampleInputEmail1">Title</label>
-            <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a unique title for your recipe">
+            <input type="email" class="mt-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a unique title for your recipe">
+          </div>
 
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <span> <i class="icon far fa-clock mr-3"></i>  </span>
+                <label for="exampleInputEmail1">Preperation Time</label>
+                <input type="email" class="mt-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a unique title for your recipe">
+              </div>
+              <div class="col-md-4">
+                <span> <i class="icon fas fa-clock mr-3"></i>  </span>
+                <label for="exampleInputEmail1">Cooking Time</label>
+                <input type="email" class="mt-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a unique title for your recipe">
+              </div>
+              <div class="col-md-4">
+                <span> <i class="icon fas fa-users mr-3"></i>  </span>
+                <label for="exampleInputEmail1">Number of Servings</label>
+                <input type="email" class="mt-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a unique title for your recipe">
+              </div>
+            </div>
           </div>
 
           <div class="form-group">
             <span> <i class="icon fas fa-info-circle mr-3"></i>  </span>
             <label for="exampleInputPassword1">Descriptions</label>
-            <textarea class="form-control " id="exampleFormControlTextarea1" rows="5" placeholder="Enter a detailed instruction..."></textarea>
+            <textarea class="mt-2 form-control " id="exampleFormControlTextarea1" rows="5" placeholder="Enter a description..."></textarea>
           </div>
 
           <div class="form-group">
-            <span> <i class="icon fas fa-tags mr-3"></i>  </span>
-            <label for="exampleInputEmail1">Select Tags</label>
-            <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Select appropriate tags">
+            <label for="exampleInputPassword1"><i class="icon fas fa-chalkboard-teacher mr-3"></i> Instructions</label>
+            <div class="mt-2"> <!-- to be removed later-->
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Instruction 1">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Instruction 2">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Instruction 3">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Instruction 4">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Instruction 5">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Instruction 6">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Instruction 7">
+            </div>
+          </div>
+
+          <div class="form-group">
+
+            <label for="exampleInputPassword1"><i class="icon fas fa-mortar-pestle mr-3"></i> Ingredients</label>
+            <div class="mt-2">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingredient 1">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingredient 2">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingredient 3">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingredient 4">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingredient 5">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingredient 6">
+              <input type="email" class="mb-2 form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingredient 7">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1"> <i class="icon fas fa-tags mr-3"></i> Select Tags</label>
+            <div class="mt-2 mb-2 d-flex flex-wrap">
+              <% recipe_tags.forEach(function(tag) { %>
+                  <a href="#" class="mr-2 mb-2 px-2 tag text-lowercase"><%= tag %></a>
+              <% }); %>
+            </div>
+            <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search for tags">
 
           </div>
 
-          <button type="submit" class="btn-lg btn-block btn-info float-right"> <span> <i class="icon fas fa-paper-plane mr-3"></i>  </span> Submit</button>
+          <div class="row mt-5">
+            <div class="col-md-6">
+              <a href="/dashboard" class="btn btn-outline-dark btn-block btn-lg float-right"> <i class="icon fas fa-ban mr-3"></i> Cancel</a>
+            </div>
+            <div class="col-md-6">
+              <button type="submit" class="btn-lg btn-block btn-info float-right"> <span> <i class="icon fas fa-paper-plane mr-3"></i>  </span> Submit</button>
+            </div>
+          </div>
         </form>
       </div>
     </div>

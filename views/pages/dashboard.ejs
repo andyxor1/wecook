@@ -5,8 +5,7 @@
   <div class="col-md-3">
     <% include ../includes/sidebar %>
   </div>
-  <div class="col-md-9">
-    <div class="container mt-5">
+  <div class="col-md-9 pt-5">
       <h1 class="text-dark mb-5 font-40">WELCOME TO THE COMMUNITY BOARD</h1>
 
       <% recipe_seeds.forEach(function(recipe) { %>
@@ -14,6 +13,5 @@
         <%- include('../includes/recipe', {recipe: recipe}); %>
       <% }); %>
 
-    </div>
   </div>
 </div>

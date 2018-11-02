@@ -12,11 +12,31 @@
 .recipe_preview .icon {
   vertical-align: middle;
 }
-.recipe_preview .tags {
+
+.share_recipe .icon {
+  vertical-align: middle;
+  font-size: 30px;
+}
+
+.recipe_preview .tag {
   border: 1px solid grey;
   padding: 3px;
   border-radius: 5px;
 }
+
+.share_recipe .tag {
+  border: 1px solid grey;
+  padding: 3px;
+  border-radius: 5px;
+}
+.share_recipe .cancel {
+  color: black;
+}
+.share_recipe button {
+  cursor: pointer;
+}
+
+
 
 .font-10 {
   font-size: 10px;

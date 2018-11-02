@@ -2,8 +2,8 @@
 <% include ../includes/nav %>
 
 
-<div class="container mt-5">
-  
-<% include ../includes/recipe_form %>
+<div class="container mt-5 share_recipe">
+
+ <%- include('../includes/recipe_form', {recipe_tags: recipe_tags}); %>
 
 </div>
