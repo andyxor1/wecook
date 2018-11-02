@@ -9,6 +9,11 @@
 .recipe_preview img {
   width: 100%;
 }
+
+.dashboard .col-md-9 {
+  padding-left: 0;
+  padding-right: 0;
+}
 .recipe_preview .icon {
   vertical-align: middle;
 }
