@@ -18,6 +18,25 @@ if ( isLocal ) {
 } else {
   console.log("==> Connected to Remote Mongo ...");
 }
+// var Schema = mongoose.Schema;
+//
+// var storeSchema = new Schema({
+//   ingredients:   { type: [String] },
+// });
+//
+// var Store = mongoose.model("Store", storeSchema );
+// var newStore = new Store ({
+//   ingredients: ["apple", "orange", "banana"]
+// });
+//
+//
+// newStore.save(function(err, user) {
+//   if(err) {
+//     console.log(err)
+//   } else {
+//     console.log(newStore);
+//   }
+// });
 
 
 // not so sure about these but basically look up "CORS" it's so that we could request items cross sites
