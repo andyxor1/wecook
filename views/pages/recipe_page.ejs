@@ -1,0 +1,78 @@
+<%include ../includes/header %>
+<%include ../includes/nav %>
+
+<div class="container mt-5 recipe_container">
+
+    <!-- Image and Info -->
+    <div>
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="card-title text-info">Tofu Stew <%# recipe.title; %></h1>
+                <p><small>Recipe by:</small></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
+                    <%# recipe.description; %>
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img src="/pictures/tofu-stew.jpg" alt="Image of Recipe">
+            </div>
+        </div>
+    </div>
+
+    <!-- Ingredients -->
+    <div>
+        <h3>Ingredients</h3>
+        <hr>
+        <ul>
+            <%# INGREDIENTS.forEach( (ingred)  => { %>
+            <!-- <li><%#= ingred %></li> -->
+            <%# }); %>
+
+            <li>Fetch</li>
+            <li>ingredients</li>
+            <li>list</li>
+            <li>and</li>
+            <li>uncomment</li>
+            <li>above</li>
+        </ul>
+    </div>
+
+    <!-- Directions -->
+    <div>
+        <h3>Directions</h3>
+        <hr>
+        <div id="prepTime">
+            <ul>
+                <li>
+                    <i class="icon far font-30 fa-clock"></i>
+                </li>
+                <li>
+                    <p>Prep Time</p>
+                    <time>40 m</time>
+                </li>
+                <li>
+                    <p>Cook Time</p>
+                    <time>30 m</time>
+                </li>
+                <li>
+                    <p>Ready In</p>
+                    <time>1 h 10 m</time>
+                </li>
+            </ul>
+        </div>
+
+        <ol>
+            <%# INSTRUCTIONS.forEach( (ingred) => { %>
+            <!-- <li><%#= ingred %></li> -->
+            <%# }); %>
+
+            <li>Fetch</li>
+            <li>instruction</li>
+            <li>list</li>
+            <li>and</li>
+            <li>uncomment</li>
+            <li>above</li>
+        </ol>
+    </div>
+</div>
