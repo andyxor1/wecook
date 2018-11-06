@@ -35,5 +35,8 @@ router.get('/settings', function ( req, res, next ) {
     res.render('pages/settings');
 });
 
+router.get('/recipe', function ( req, res, next ) {
+    res.render('pages/recipe_page');
+});
 
 module.exports = router;
