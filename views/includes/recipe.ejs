@@ -1,3 +1,13 @@
+<%function truncateText(text, maxLength) {
+  var truncated = text;
+
+  if (truncated.length > maxLength) {
+    truncated = truncated.substr(0,maxLength) + '...';
+  }
+  return truncated;
+}%>
+
+
 <div class="card my-4 recipe_preview">
   <div class="card-header bg-warning">
     <h3 class="text-dark text-uppercase font-weight-bold"><%= recipe.title %></h3>
@@ -10,7 +20,7 @@
       </div>
       <div class="col-md-8">
         <p class="card-text"><i class="icon mr-2 font-25 fas fa-clock"></i> <%= recipe.cook_time %> minutes</p>
-        <p class="card-text"><i class="icon mr-2 font-25 fas fa-info-circle"></i> <%= recipe.description %></p>
+        <p class="card-text"><i class="icon mr-2 font-25 fas fa-info-circle"></i> <%= truncateText(recipe.description, 200) %></p>
         <div class="d-flex flex-wrap">
           <i class="icon mr-2 py-1 font-25 fas fa-tags"></i>
             <% recipe.tags.forEach(function(tag) { %>

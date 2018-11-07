@@ -3,7 +3,7 @@ var recipe_seeds = [{
   "prep_time": "10",
   "cook_time": "15",
   "picture": "/pictures/tofu-stew.jpg",
-  "description": "Tiny tofu with tinny bit of salt Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+  "description": "Tiny tofu with tinny bit of salt Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. kajcjksdjkdsfdkjshfkjshkjfnskjfnkjsnkjsnkjsnfkjsnfkjsnfkjnfkjanfkjankjandkjsandkjandjkasndkjandkjnakjnakjdnk",
   "instructions": [
                   "Go buy some tofu",
                   "Use knife to cut them up into cubes",
