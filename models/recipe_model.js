@@ -8,8 +8,8 @@ var RecipeSchema = new Schema({
   picture: { type: String },
   description: { type: [String] },
   instructions: { type: [String] },
+  author: { type: String },
   tags: { type: [Schema.Types.ObjectId]},
-  author: { type: String, Schema.Types.ObjectId }
 });
 
 
