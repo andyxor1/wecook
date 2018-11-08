@@ -196,3 +196,7 @@ footer {
 .footer-container ul li > a {
   float: left;
 }
+
+#footer-icon a{
+  color: #3cc9ff;
+}
