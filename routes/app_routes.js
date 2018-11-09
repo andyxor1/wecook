@@ -108,7 +108,7 @@ router.post('/dashboard', async function(req, res) {
 
     queryObj = {};
     if(searchTerm != "") {
-      queryObj["title"] = searchTerm;
+      queryObj["title"] = { "$regex": searchTerm, "$options": "i" };
     }
 
     if(searchTags.length != 0) {
