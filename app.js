@@ -45,12 +45,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // this if else block is so that we could connect to an online mongodb when we need to (mongolabs, AWS dyanamoDB)
-var isLocal = true;
+var isLocal = false;
 if ( isLocal ) {
   mongoose.connect('mongodb://localhost:27017/wecook', { useNewUrlParser: true });
   console.log("==> Connected to Local Mongo at localhost:27017");
 } else {
-  mongoose.connect('mongodb://yseofficer:yse2012@ds227821.mlab.com:27821/yse_scholarship');
+  mongoose.connect('mongodb://wecook:weekcook18@ds111258.mlab.com:11258/wecook');
   console.log("==> Connected to Remote Mongo ...");
 }
 
