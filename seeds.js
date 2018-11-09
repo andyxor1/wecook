@@ -103,7 +103,7 @@ function seedDB(){
   seedStore();
   seedUser();
   seedRecipe();
-  // seedTags(); // not sure if needed
+  seedTags(); // not sure if needed
 
    // Remove all recipes
    // Recipe.remove({}, function(err){

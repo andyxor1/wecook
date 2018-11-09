@@ -4,13 +4,43 @@ var bodyParser = require('body-parser'); // for parsing from HTTP message body
 var mongoose = require('mongoose'); // for mongo db
 var path = require('path'); // for specifying path of directory
 var seedDB = require("./seeds");
+var elasticlunr = require('elasticlunr');
 
 if(false){seedDB();}
+
+
+// let recipe_search = elasticlunr(function () {
+//     this.addField('title');
+//     this.addField('description');
+// });
+//
+//
+// var doc1 = {
+//     "id": 1,
+//     "title": "Oracle released its latest database Oracle 12g",
+//     "body": "Yestaday Oracle has released its new database Oracle 12g, this would make more money for this company and lead to a nice profit report of annual year."
+// }
+//
+// var doc2 = {
+//     "id": 2,
+//     "title": "Oracle released its profit report of 2015",
+//     "body": "As expected, Oracle released its profit report of 2015, during the good sales of database and hardware, Oracle's profit of 2015 reached 12.5 Billion."
+// }
+//
+//
+// recipe_search.addDoc(doc1);
+// recipe_search.addDoc(doc2);
+//
+// recipe_search.search("Oracle database profit");
+
+
+
+
 
 // seperate routes for modularity
 var appRoutes = require('./routes/app_routes')  // this is just saying include all the routes from /routes/app_routes
 
-var app = express(); // initialize an express instance
+var app = express(); // initialize an express instance, set body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -38,8 +68,8 @@ app.set('views', path.join(__dirname, 'views')); // specify that we want to use 
 app.set('view engine', 'ejs'); // specify our "view engine" will be ejs, aka let's use ejs
 
 
-
-
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
 app.use('/', appRoutes); // use the route you previously defined, or "required" (for modularity)
 app.use(express.static(path.join(__dirname, 'public'))); // specify our assets (such as Bootstrap, CSS, JS) to be in "public" folder
 

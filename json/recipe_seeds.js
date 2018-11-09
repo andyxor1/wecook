@@ -12,7 +12,7 @@ var recipe_seeds = [{
                   "Add salt",
                   "Let rest and start consuming"
                   ],
-  "tags": [],
+  "tags": ["cool", "easy", "hard", "Earl's", "Village"],
   "author": "kaungyang"
 },
 
@@ -30,7 +30,7 @@ var recipe_seeds = [{
                   "Add salt and pepper",
                   "Let rest and start consuming"
                   ],
-  "tags": [],
+  "tags": ["hot", "salmon", "salty", "Broccolli", "Sixth", "Pork", "Fish"],
   "author": "mingbinli"
 },
 
@@ -48,7 +48,7 @@ var recipe_seeds = [{
                   "Add salt and pepper",
                   "Let rest and start consuming"
                   ],
-  "tags": [],
+  "tags": ["cool", "easy", "hard", "Earl's", "Village", "Chicken", "Fried"],
   "author": "andrewor"
 }
 ]
