@@ -209,9 +209,10 @@ router.get('/settings', function ( req, res, next ) {
 });
 
 router.post('/add-recipe', async function(req, res) {
-    
+
     var recipe = req.body;
-    
+    recipe["picture"] = "/pictures/tofu-stew.jpg";
+
     console.log("Hello---------------------------------------------------------------------------------------------");
     console.log(recipe);
     console.log("Bye---------------------------------------------------------------------------------------------");
@@ -220,16 +221,14 @@ router.post('/add-recipe', async function(req, res) {
     // debugger;
     // Add recipe to DB
     Recipe.create(recipe, function(err, recipe) {
-        if(err) { 
-            console.log(err); 
-        } else { 
+        if(err) {
+            console.log(err);
+        } else {
             console.log('RECIPES: ----------> added a recipe: ' + recipe.title);
         }
     });
     // re-render
-    res.render('pages/dashboard', {
-        recipe_seeds: recipe_seeds,
-      });
+    res.redirect('/dashboard'); 
 })
 
 

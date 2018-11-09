@@ -50,6 +50,7 @@ if ( isLocal ) {
   mongoose.connect('mongodb://localhost:27017/wecook', { useNewUrlParser: true });
   console.log("==> Connected to Local Mongo at localhost:27017");
 } else {
+  mongoose.connect('mongodb://yseofficer:yse2012@ds227821.mlab.com:27821/yse_scholarship');
   console.log("==> Connected to Remote Mongo ...");
 }
 
