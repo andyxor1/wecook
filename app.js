@@ -4,7 +4,7 @@ var bodyParser = require('body-parser'); // for parsing from HTTP message body
 var mongoose = require('mongoose'); // for mongo db
 var path = require('path'); // for specifying path of directory
 var seedDB = require("./seeds");
-var elasticlunr = require('elasticlunr');
+// var elasticlunr = require('elasticlunr');
 
 if(false){seedDB();}
 
