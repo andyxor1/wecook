@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+var bodyParser = require('body-parser');
 var recipe_seeds = require('../json/recipe_seeds.js');
 var recipe_tags = require('../json/recipe_tags.js');
 var elasticlunr = require('elasticlunr');
@@ -207,6 +208,29 @@ router.get('/settings', function ( req, res, next ) {
     res.render('pages/settings');
 });
 
+router.post('/add-recipe', async function(req, res) {
+    
+    var recipe = req.body;
+    
+    console.log("Hello---------------------------------------------------------------------------------------------");
+    console.log(recipe);
+    console.log("Bye---------------------------------------------------------------------------------------------");
+    // debugger;
+    var recipe = req.body;
+    // debugger;
+    // Add recipe to DB
+    Recipe.create(recipe, function(err, recipe) {
+        if(err) { 
+            console.log(err); 
+        } else { 
+            console.log('RECIPES: ----------> added a recipe: ' + recipe.title);
+        }
+    });
+    // re-render
+    res.render('pages/dashboard', {
+        recipe_seeds: recipe_seeds,
+      });
+})
 
 
 

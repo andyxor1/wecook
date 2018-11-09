@@ -40,6 +40,26 @@
 .share_recipe button {
   cursor: pointer;
 }
+.recipe_container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #FFF;
+}
+
+#prepTime ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+#prepTime li {
+  color: #999;
+  float: left;
+  text-align: center;
+  padding: 10px;
+}
+
+
 
 
 
