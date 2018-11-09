@@ -10,7 +10,7 @@
             <span> <i class="icon fas fa-feather-alt mr-3"></i> </span>
             <label for="recipeTitle">Title</label>
             <input type="text" class="mt-2 form-control " name="title" id="recipeTitle" aria-describedby="emailHelp"
-              placeholder="Enter a unique title for your recipe">
+              placeholder="Enter a unique title for your recipe" required>
           </div>
 
           <div class="form-group">
@@ -18,17 +18,17 @@
               <div class="col-md-4">
                 <span> <i class="icon far fa-clock mr-3"></i> </span>
                 <label for="prepTime">Preperation Time</label>
-                <input type="number" class="mt-2 form-control " name="prep_time" id="prepTime" aria-describedby="emailHelp">
+                <input type="number" class="mt-2 form-control " name="prep_time" id="prepTime" aria-describedby="emailHelp" required>
               </div>
               <div class="col-md-4">
                 <span> <i class="icon fas fa-clock mr-3"></i> </span>
                 <label for="cookTime">Cooking Time</label>
-                <input type="number" class="mt-2 form-control " name="cook_time" id="cookTime" aria-describedby="emailHelp">
+                <input type="number" class="mt-2 form-control " name="cook_time" id="cookTime" aria-describedby="emailHelp" required>
               </div>
               <div class="col-md-4">
                 <span> <i class="icon fas fa-users mr-3"></i> </span>
                 <label for="numServings">Number of Servings</label>
-                <input type="number" class="mt-2 form-control " name="numServings" id="numServings" aria-describedby="emailHelp">
+                <input type="number" class="mt-2 form-control " name="numServings" id="numServings" aria-describedby="emailHelp" required>
               </div>
             </div>
           </div>
@@ -36,14 +36,14 @@
           <div class="form-group">
             <span> <i class="icon fas fa-info-circle mr-3"></i> </span>
             <label for="recipeDescription">Descriptions</label>
-            <textarea class="mt-2 form-control " name="description" id="recipeDescription" rows="5" placeholder="Enter a description..."></textarea>
+            <textarea class="mt-2 form-control " name="description" id="recipeDescription" rows="5" placeholder="Enter a description..." required></textarea>
           </div>
 
           <div class="form-group">
             <label for="instructionsList"><i class="icon fas fa-chalkboard-teacher mr-3"></i> Instructions</label>
             <div class="mt-2" id="instructionsList">
               <!-- to be removed later-->
-              <input type="text" class="mb-2 form-control " name="instructions" placeholder="Instruction 1">
+              <input type="text" class="mb-2 form-control " name="instructions" placeholder="Instruction 1" required>
               <input type="text" class="mb-2 form-control " name="instructions" placeholder="Instruction 2">
               <input type="text" class="mb-2 form-control " name="instructions" placeholder="Instruction 3">
               <input type="text" class="mb-2 form-control " name="instructions" placeholder="Instruction 4">
@@ -56,7 +56,7 @@
 
             <label for="ingredientsList"><i class="icon fas fa-mortar-pestle mr-3"></i> Ingredients</label>
             <div class="mt-2" id="ingredientsList">
-              <input type="text" class="mb-2 form-control " name="ingredients" placeholder="Ingredient 1">
+              <input type="text" class="mb-2 form-control " name="ingredients" placeholder="Ingredient 1" required>
               <input type="text" class="mb-2 form-control " name="ingredients" placeholder="Ingredient 2">
               <input type="text" class="mb-2 form-control " name="ingredients" placeholder="Ingredient 3">
               <input type="text" class="mb-2 form-control " name="ingredients" placeholder="Ingredient 4">
