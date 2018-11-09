@@ -10,7 +10,9 @@ if(true){seedDB();}
 // seperate routes for modularity
 var appRoutes = require('./routes/app_routes')  // this is just saying include all the routes from /routes/app_routes
 
-var app = express(); // initialize an express instance
+var app = express(); // initialize an express instance, set body-parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // this if else block is so that we could connect to an online mongodb when we need to (mongolabs, AWS dyanamoDB)
 var isLocal = true;
