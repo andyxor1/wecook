@@ -1,0 +1,67 @@
+<% include ../includes/header %>
+<% include ../includes/nav %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card questionbox-card text-dark">
+        <div class="card-body">
+          <h1 class="card-title text-warning"> <%= recipe.title %> </h1>
+          <h6 class="card-subtitle mb-2 text-muted mb-4 font-italic"> Recipe By: <%= recipe.author %></h6>
+          <hr>
+
+          <div class="row">
+            <div class="col-md-4">
+              <img src="<%= recipe.picture %>" alt="<%= recipe.title %>">
+            </div>
+          </div>
+
+          <hr class="my-3">
+
+          <div class="row">
+            <div class="col-md-4">
+              <h1><i class="icon mr-2 font-25 fas fa-info-circle"></i> Ingredients</h1>
+              <hr>
+              <ul>
+                <% recipe.ingredients.forEach(function(ingredient) { %>
+                    <li><%= ingredient %></li>
+                <% }); %>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <h1><i class="icon mr-2 font-25 fas fa-info-circle"></i> Description</h1>
+              <p>
+                  <%= recipe.description %>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <h1><i class="icon mr-2 font-25 fas fa-info-circle"></i> Instructions</h1>
+              <hr>
+              <div id="prepTime">
+                  <ul>
+                      <li>
+                          <i class="icon far font-30 fa-clock"></i> Prep Time:  <time><%= recipe.prep_time %> minutes</time>
+                      </li>
+                      <li>
+                          <i class="icon fas font-30 fa-clock"></i> Cook Time: <time><%= recipe.prep_time %> minutes</time>
+                      </li>
+
+                  </ul>
+              </div>
+               <ol>
+                 <% recipe.instructions.forEach(function(instruction) { %>
+                     <li><%= instruction %></li>
+                 <% }); %>
+              </ol>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% include ../includes/footer %>

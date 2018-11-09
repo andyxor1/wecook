@@ -2,7 +2,7 @@
 <% include ../includes/nav %>
 
 <div class="container dashboard">
-  <% include ../includes/nav_search %>
+
   <div class="row">
     <div class="col-md-3">
       <% include ../includes/sidebar %>
@@ -10,6 +10,7 @@
     <div class="col-md-9 pt-5">
       <div class="container">
         <h1 class="text-dark mb-5 font-40" >RECIPE BOARD</h1>
+        <% include ../includes/nav_search %>
         <div class="" id="recipe_result">
           <% recipe_seeds.forEach(function(recipe) { %>
             <% console.log(recipe.title); %>

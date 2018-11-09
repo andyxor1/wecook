@@ -4,6 +4,7 @@ var recipe_seeds = [{
   "cook_time": "15",
   "picture": "/pictures/tofu-stew.jpg",
   "description": "Tiny tofu with tinny bit of salt Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. kajcjksdjkdsfdkjshfkjshkjfnskjfnkjsnkjsnkjsnfkjsnfkjsnfkjnfkjanfkjankjandkjsandkjandjkasndkjandkjnakjnakjdnk",
+  "ingredients": ["tofu", "water", "ginger", "egg", "chilli"],
   "instructions": [
                   "Go buy some tofu",
                   "Use knife to cut them up into cubes",
@@ -22,6 +23,7 @@ var recipe_seeds = [{
   "cook_time": "20",
   "picture": "/pictures/fried-salmon.jpg",
   "description": "Smoking salmon with salty skin Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "ingredients": ["salmon", "oil", "salt", "pepper", "leek"],
   "instructions": [
                   "Go buy some salmon",
                   "Use knife to cut salmon up into cubes",
@@ -40,6 +42,7 @@ var recipe_seeds = [{
   "cook_time": "15",
   "picture": "/pictures/pasta.jpg",
   "description": "Pungent pasta with pronounced pepper Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "ingredients": ["pork", "garlic", "noodles", "pepper"],
   "instructions": [
                   "Go buy some salmon",
                   "Use knife to cut salmon up into cubes",
