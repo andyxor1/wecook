@@ -9,7 +9,7 @@ var RecipeSchema = new Schema({
   description: { type: [String] },
   instructions: { type: [String] },
   author: { type: String },
-  tags: { type: [Schema.Types.ObjectId]},
+  tags: { type: [String]},
 });
 
 

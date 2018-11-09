@@ -4,8 +4,8 @@
       <div class="card-body">
         <h1 class="card-title text-info"> Share your recipe ...</h1>
         <h6 class="card-subtitle mb-2 text-muted mb-4 font-italic"> your recipe could help a hungry student...</h6>
-        <!--<form> action="addRecipe.js" method="POST"> -->
-            <form id="recipeForm" action="/add-recipe" method="POST">
+        <form id="recipeForm" action="/add-recipe" method="POST">
+        <!-- <form id="recipeForm" action="https://httpbin.org/post" method="POST"> -->
           <div class="form-group">
             <span> <i class="icon fas fa-feather-alt mr-3"></i> </span>
             <label for="recipeTitle">Title</label>
@@ -67,11 +67,23 @@
 
           <div class="form-group">
             <label for="tagsList"> <i class="icon fas fa-tags mr-3"></i> Select Tags</label>
-            <div class="mt-2 mb-2 d-flex flex-wrap" id="tagList">
-              <% recipe_tags.forEach(function(tag) { %>
-              <a href="#" class="mr-2 mb-2 px-2 tag text-lowercase">
-                <%= tag %></a>
-              <% }); %>
+            <div class="form-check" id="tagList">
+              <input type="checkbox" class="form-check-input" name="tags" value="Earl's"> <label class="form-check-label" for="Earl's">Earl's</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Goody's"> <label class="form-check-label" for="Goody's">Goody's</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="John's"> <label class="form-check-label" for="John's">John's</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Roger's"> <label class="form-check-label" for="Roger's">Roger's</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Sixth"> <label class="form-check-label" for="Sixth">Sixth</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Village"> <label class="form-check-label" for="Village">Village</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Tofu"> <label class="form-check-label" for="Tofu">Tofu</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Beef"> <label class="form-check-label" for="Beef">Beef</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Fish"> <label class="form-check-label" for="Fish">Fish</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Chicken"> <label class="form-check-label" for="Chicken">Chicken</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Cheese"> <label class="form-check-label" for="Cheese">Cheese</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Bokchoi"> <label class="form-check-label" for="Bokchoi">Bokchoi</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Broccoli"> <label class="form-check-label" for="Broccoli">Broccoli</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Snowpeas"> <label class="form-check-label" for="Snowpeas">Snowpeas</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Asparagus"> <label class="form-check-label" for="Asparagus">Asparagus</label><br>
+              <input type="checkbox" class="form-check-input" name="tags" value="Spinach"> <label class="form-check-label" for="Spinach">Spinach</label><br>
             </div>
             <input type="text" class="form-control " id="searchTags" aria-describedby="emailHelp" placeholder="Add a tag">
 
