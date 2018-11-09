@@ -6,6 +6,7 @@ var RecipeSchema = new Schema({
   prep_time: { type: Number, min: 0, default: 0 },
   cook_time: { type: Number, min: 0, default: 0 },
   picture: { type: String },
+  ingredients: { type: [String] },
   description: { type: [String] },
   instructions: { type: [String] },
   author: { type: String },

@@ -63,24 +63,86 @@ router.get('/dashboard', function ( req, res, next ) {
     });
 
   });
-
-
 });
-router.post('/dashboard', function ( req, res, next ) {
 
-  Recipe.find({"title": value }, function(err, recipes) {
+router.get('/dashboard/:id', function ( req, res, next ) {
+
+  console.log(req.params.id);
+  Recipe.findById(req.params.id, function(err, recipe) {
     if(err) { console.log(err); }
+    console.log(recipe.ingredients);
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
-    console.log(req.body);
-    console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
-    res.render('pages/dashboard', {
-      recipe_seeds: recipes,
+    res.render('pages/recipe_details', {
+      recipe: recipe,
     });
 
   });
-
-
 });
+//POST call for recipe query
+router.post('/dashboard', async function(req, res) {
+    var searchTerm = "";
+    var searchTags = [];
+    for(var key in req.body) {
+        if(req.body.hasOwnProperty(key)){
+            //do something with e.g. req.body[key]
+            console.log("%s   ======    %s", key,req.body[key]);
+
+            console.log(typeof(req.body[key]));
+            if(key == "search") {
+              searchTerm = req.body[key];
+              console.log("search term");
+              console.log(searchTerm);
+            }
+
+            else if(req.body[key] == "true") {
+
+              searchTags.push(key);
+              console.log("search key");
+              console.log(searchTags);
+            }
+
+
+        }
+    }
+
+    queryObj = {};
+    if(searchTerm != "") {
+      queryObj["title"] = searchTerm;
+    }
+
+    if(searchTags.length != 0) {
+      console.log("called here");
+      queryObj["tags"] = { $all: searchTags };
+    }
+
+    console.log(queryObj);
+
+    Recipe.find(queryObj, function(err, recipes) {
+      if(err) {console.log(err); }
+      // res.json(req.body["Earl's"]);
+      res.json(recipes);
+    })
+
+
+    // let result = await User.findById(userId);
+    //doSomethingElseWith(result);
+
+})
+// router.post('/dashboard', function ( req, res, next ) {
+//
+//   Recipe.find({"title": value }, function(err, recipes) {
+//     if(err) { console.log(err); }
+//     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
+//     console.log(req.body);
+//     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
+//     res.render('pages/dashboard', {
+//       recipe_seeds: recipes,
+//     });
+//
+//   });
+//
+//
+// });
 // router.post('/dashboard', function ( req, res, next ) {
 //   console.log("called here")
 //   console.log(req.body);
@@ -145,20 +207,7 @@ router.get('/settings', function ( req, res, next ) {
     res.render('pages/settings');
 });
 
-//POST call for recipe query
-router.post('/find-recipes', async function(req, res) {
-    for(var key in req.body) {
-        if(req.body.hasOwnProperty(key)){
-            //do something with e.g. req.body[key]
-            console.log("%s   ======    %s", key,req.body[key]);
-        }
-    }
 
-
-    //let result = await User.findById(userId);
-    //doSomethingElseWith(result);
-    res.json(req.body["Earl's"]);
-})
 
 
 
