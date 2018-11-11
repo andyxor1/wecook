@@ -1,3 +1,43 @@
+body {
+  height: 100%;
+  background-color: #f1f1f1;
+}
+
+html {
+  height: 100%;
+}
+
+/*
+/////////////////////
+// Index Page CSS ////
+/////////////////////
+*/
+
+.index .login-card .login{
+  background-color: #e3f0fd;
+  /* background: linear-gradient(to right top, #4cbcd3, #89D3E2) */
+}
+.index .login-card {
+  width: 100%;
+}
+.index .jumbotron {
+  border-radius: 5px;
+  background-color: white;
+}
+
+.index .card {
+  border-radius: 5px;
+}
+
+/* ////////// END OF INDEX CSS ////////// */
+
+
+
+
+.login-card .label-div {
+  display: inline-block;
+}
+
 .sidebar_div {
   background-color: #ccc;
   padding: 20px;
@@ -127,51 +167,6 @@
   vertical-align: middle;
 }
 
-body {
-  height: 100%;
-  background-color: #f1f1f1;
-}
-
-html {
-  height: 100%;
-}
-
-.index .login-card {
-  width: 100%;
-}
-
-.index .login-card .login{
-  background-color: #e3f0fd;
-  border: none;
-}
-
-.index .login-card .icon {
-  font-size: 20px;
-}
-
-.index .jumbotron {
-  border-radius: 15px;
-  text-align: center;
-  margin-top: 25px;
-  background-color: #b9d8fd;
-  color: #1c599f;
-}
-
-/* .index .jumbotron {
-
-} */
-
-.index .card {
-  border-radius: 15px;
-}
-
-.index .jumbotron img {
-  width: 150px;
-}
-
-.login-card .label-div {
-  display: inline-block;
-}
 
 
 .questionbox-card {

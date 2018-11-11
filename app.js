@@ -5,8 +5,10 @@ var mongoose = require('mongoose'); // for mongo db
 var path = require('path'); // for specifying path of directory
 var seedDB = require("./seeds");
 // var elasticlunr = require('elasticlunr');
-
+var passport = require('passport');
 if(false){seedDB();}
+
+
 
 
 // let recipe_search = elasticlunr(function () {
@@ -35,8 +37,6 @@ if(false){seedDB();}
 
 
 
-
-
 // seperate routes for modularity
 var appRoutes = require('./routes/app_routes')  // this is just saying include all the routes from /routes/app_routes
 
@@ -44,8 +44,9 @@ var app = express(); // initialize an express instance, set body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 // this if else block is so that we could connect to an online mongodb when we need to (mongolabs, AWS dyanamoDB)
-var isLocal = false;
+var isLocal = true;
 if ( isLocal ) {
   mongoose.connect('mongodb://localhost:27017/wecook', { useNewUrlParser: true });
   console.log("==> Connected to Local Mongo at localhost:27017");
@@ -65,8 +66,11 @@ app.use(function(req, res, next) {
 
 
 
+
 app.set('views', path.join(__dirname, 'views')); // specify that we want to use "views" folder for our "HTML" templates
 app.set('view engine', 'ejs'); // specify our "view engine" will be ejs, aka let's use ejs
+
+
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -85,3 +89,5 @@ app.use(function(req, res, next) { // if there's anything wrong, render the erro
 app.listen(process.env.PORT || 3000, function(){
   console.log("==> Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
+
+module.exports = app;

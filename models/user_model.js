@@ -10,6 +10,6 @@ var UserSchema = new mongoose.Schema({
   recipes_owned: {type: [Schema.Types.ObjectId], ref: "Recipe"}
 });
 
-// UserSchema.plugin(passportLocalMongoose);
+UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", UserSchema);

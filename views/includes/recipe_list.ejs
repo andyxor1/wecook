@@ -15,9 +15,9 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-4">
-        <img class="recipe_preview mb-3" src="<%= recipe.picture%>" alt="<%= recipe.title%>" >
+        <img class="recipe_preview mb-3 img-fluid" src="<%= recipe.picture%>" alt="<%= recipe.title%>" >
 
-        <a href="/dashboard/<%= recipe._id%>" class="btn btn-block btn-outline-danger btn-lg float- mt-2 mb-2"> <i class="fas fa-laugh-beam"></i> View Recipe</a>
+        <a href="/recipe/<%= recipe._id%>" class="btn btn-block btn-outline-danger btn-lg float- mt-2 mb-2"> <i class="fas fa-laugh-beam"></i> View Recipe</a>
 
       </div>
       <div class="col-md-8">

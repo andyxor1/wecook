@@ -3,113 +3,27 @@
 
 <div class="container index">
 
-  <div class="jumbotron">
+  <div class="jumbotron mt-5">
     <div class="row">
-      <div class="col-md-12">
-
-          <a href="/">
-               <img src="logos/cooking.svg" alt="Wecook Logo" class="img-fluid mr-3">
-          </a>
-          <span class="h1 align-middle">   Welcome to the WeCook Web Application! </span>
-
-
+      <div class="col-md-12 text-center">
+          <h1 class="align-middle">  WECOOK </h1>
+          <p class="align-middle font-italic">  - Designed for explorers  </p>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-
-    <div class="col-sm-6 login-card ">
-      <div class="card login">
-        <div class="card-body">
-          <h3 class="card-title text-primary mb-4">Login</h3>
-          <form>
-            <div class="form-group row">
-
-              <div class="col-md-4">
-                <span> <i class="icon fas fa-envelope mr-3"></i>  </span>
-                <label for="inputEmail3" class="col-form-label"> Email  </label>
-              </div>
-              <div class="col-md-8">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-md-4">
-                <span> <i class="icon fas fa-key mr-3"></i> </span>
-                <label for="inputPassword3" class="col-form-label">Password</label>
-              </div>
-
-              <div class="col-md-8">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-              </div>
-            </div>
-
-            <div class="form-group row float-right">
-              <div class="col-sm-12">
-                <a href="/dashboard" class="btn btn-primary float-right ml-2">Sign In</a>
-                <button type="submit" class="btn btn-warning">Forgot Password</button>
-              </div>
-            </div>
-          </form>
+      <div class="row">
+        <div class="col-sm-6 login-card ">
+          <% include ./includes/login_card %>
         </div>
-      </div>
-    </div>
-    <%# end of Login %>
+        <%# end of Login %>
 
-    <div class="col-sm-6 login-card">
-      <div class="card create-account">
-        <div class="card-body">
-          <h3 class="card-title text-dark mb-4">Create an Account</h3>
-          <form>
-
-            <div class="form-group row">
-              <div class="col-md-4">
-                <span> <i class="icon fas fa-envelope mr-3"></i>  </span>
-                <label for="inputEmail3" class="col-form-label"> Email  </label>
-              </div>
-              <div class="col-md-8">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <div class="col-md-4">
-                <span> <i class="icon fas fa-redo-alt mr-3"></i> </span>
-                <label for="inputPassword3" class="col-form-label">Confirm Email </label>
-              </div>
-              <div class="col-md-8">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Confirm Email">
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <div class="col-md-4">
-                <span> <i class="icon fas fa-key mr-3"></i> </span>
-                <label for="inputPassword3" class="col-form-label">Password</label>
-              </div>
-              <div class="col-md-8">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-              </div>
-            </div>
-
-            <div class="form-group row float-right">
-              <div class="col-sm-12">
-                <button type="submit" class="btn btn-dark float-right ml-2">Create Account </button>
-              </div>
-            </div>
-
-          </form>
+        <div class="col-sm-6 login-card">
+          <% include ./includes/create_account_card %>
         </div>
+        <%# end of CREATE AN ACCOUNT  %>
       </div>
-    </div>
-    <%# end of CREATE AN ACCOUNT  %>
-  </div>
-  <%# end of ROW %>
-
-
-
-
+      <%# end of ROW %>
+</div>
 </div>
 <%# end of INDEX %>
 <% include ./includes/footer %>

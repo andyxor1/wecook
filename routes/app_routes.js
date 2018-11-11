@@ -7,11 +7,14 @@ var recipe_tags = require('../json/recipe_tags.js');
 var elasticlunr = require('elasticlunr');
 var nlp = require('compromise')
 // "require" is similar to import statements
-
 var mongoose = require('mongoose'); // for mongo db
 var path = require('path'); // for specifying path of directory
 
+// Authentications
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
 
+var User = require("../models/user_model");
 var Recipe = require('../models/recipe_model');
 var Tag = require('../models/tag_model');
 var bodyParser = require('body-parser'); // for parsing from HTTP message body
@@ -21,6 +24,96 @@ var LocalStorage = require('node-localstorage').LocalStorage,
 localStorage = new LocalStorage('./scratch');
 
 
+router.use(function(req, res, next) {
+  console.log(req.user);
+  res.locals.currentUser = req.user;
+  next();
+});
+
+
+router.use(require('express-session')({
+  secret: "wecook is the best app",
+  resave: false,
+  saveUninitialized: false
+}));
+
+router.use(passport.initialize());
+router.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// ------------------
+// AUTH ROUTES |
+// ------------------
+router.post("/login", passport.authenticate("local",
+
+  {
+    successRedirect: "/dashboard",
+    failureRedirect: "/"
+  }), function(req, res) {
+
+});
+
+router.post('/signup', function( req, res ) {
+  var newUser = new User({username: req.body.username})
+  User.register(newUser, req.body.password, function(err, user) {
+    if(err) {
+      console.log(err);
+      return res.render('index');
+    }
+    passport.authenticate("local")(req, res, function() {
+      res.redirect("/dashboard");
+    });
+
+  });
+});
+
+router.post('/signup/check_user', function( req, res ) {
+  console.log("called");
+  var data = req.body.username;
+  User.find({username: data }, function(err, result) {
+    if(err) {
+      console.log(err);
+      return res.status(500).json({
+        title: 'An error occured',
+        error: err
+      });
+    }
+    else if (result.length == 0) {
+      return res.status(200).json({
+        msg: 'available'
+      });
+    }
+    else {
+      return res.status(200).json({
+        msg: 'used'
+      });
+    }
+  });
+});
+
+// logout
+router.get("/logout", function( req, res) {
+  console.log("called in logout get route");
+  req.logout();
+  res.redirect("/");
+});
+
+
+router.get('/reset', function( req, res) {
+  res.render("pages/reset");
+});
+
+function isLoggedIn( req, res, next ) {
+  if( req.isAuthenticated() ) {
+    console.log('called in isAuth')
+    return next();
+  }
+  console.log("islogged in ");
+  res.redirect("/");
+}
+
 // ------------------
 // INDEX ROUTES |
 // ------------------
@@ -28,9 +121,9 @@ router.get('/', function(req, res, next) {
     res.render('index');
 });
 
-router.get('/share', function ( req, res, next ) {
+router.get('/recipe/new', function ( req, res, next ) {
     console.log(recipe_tags);
-    res.render('pages/share_recipe', {
+    res.render('pages/new_recipe', {
       recipe_tags: recipe_tags,
     });
 });
@@ -52,21 +145,23 @@ router.get('/account', function ( req, res, next ) {
 // ------------------
 // DASHBOARD ROUTES |
 // ------------------
-router.get('/dashboard', function ( req, res, next ) {
+router.get('/dashboard', isLoggedIn, function ( req, res, next ) {
 
   Recipe.find(function(err, recipes) {
     if(err) { console.log(err); }
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
+    console.log(req.user);
     console.log(req.body);
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
     res.render('pages/dashboard', {
       recipe_seeds: recipes,
+      currentUser: req.user
     });
 
   });
 });
 
-router.get('/dashboard/:id', function ( req, res, next ) {
+router.get('/recipe/:id', function ( req, res, next ) {
 
   console.log(req.params.id);
   Recipe.findById(req.params.id, function(err, recipe) {
@@ -228,7 +323,7 @@ router.post('/add-recipe', async function(req, res) {
         }
     });
     // re-render
-    res.redirect('/dashboard'); 
+    res.redirect('/dashboard');
 })
 
 

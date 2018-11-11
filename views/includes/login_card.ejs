@@ -1,0 +1,37 @@
+<div class="card login">
+  <div class="card-body">
+    <h3 class="card-title text-primary mb-4">Login</h3>
+    <div class="mt-3 small account-message login alert d-none" role="alert">
+      <strong> Success! </strong> You will now be redirected to your dashboard.
+    </div>
+    <form action="/login" method="POST">
+      <div class="form-group row">
+
+        <div class="col-md-4">
+          <span> <i class="icon fas fa-user-alt mr-2"></i>  </span>
+          <label for="loginEmail" class="col-form-label"> Username  </label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="loginUsername" name="username" placeholder="Username">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-4">
+          <span> <i class="icon fas fa-key mr-2"></i> </span>
+          <label for="loginPassword" class="col-form-label">Password</label>
+        </div>
+
+        <div class="col-md-8">
+          <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password">
+        </div>
+      </div>
+
+      <div class="form-group row float-right">
+        <div class="col-sm-12">
+          <button id="loginButton" type="submit" class="btn btn-primary float-right ml-2">Sign In </button>
+          <a href="/reset" class="btn btn-warning"> Forgot Password</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

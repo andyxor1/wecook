@@ -12,7 +12,7 @@
 
           <div class="row">
             <div class="col-md-4">
-              <img src="<%= recipe.picture %>" alt="<%= recipe.title %>">
+              <img class="img-fluid" src="<%= recipe.picture %>" alt="<%= recipe.title %>">
             </div>
           </div>
 
@@ -30,6 +30,7 @@
             </div>
             <div class="col-md-4">
               <h1><i class="icon mr-2 font-25 fas fa-info-circle"></i> Description</h1>
+              <hr>
               <p>
                   <%= recipe.description %>
               </p>
