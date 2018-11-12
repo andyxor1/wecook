@@ -192,19 +192,6 @@ router.get('/dashboard/community', function ( req, res, next ) {
 
   });
 });
-router.delete("/recipe/:id", function( req, res) {
-
-  res.send("This is the recipe destory route");
-  // Recipe.findByIdAndRemove(req.params.id, function(err){
-  //   if(err) {
-  //     console.log("called in delete recipe route");
-  //   } else {
-  //     res.redirect("/dashboard")
-  //   }
-  //
-  // });
-});
-
 
 router.get('/recipe/:id', function ( req, res, next ) {
 
@@ -219,6 +206,21 @@ router.get('/recipe/:id', function ( req, res, next ) {
 
   });
 });
+
+router.delete("/recipe/:id", function( req, res) {
+  console.log("called in recipe destroy route")
+  Recipe.findByIdAndRemove(req.params.id, function(err){
+    if(err) {
+      console.log(err);
+      res.redirect("back");
+    } else {
+      res.redirect("/account/" + req.user._id); 
+    }
+
+  });
+});
+
+
 //POST call for recipe query
 router.post('/dashboard', async function(req, res) {
     var searchTerm = "";

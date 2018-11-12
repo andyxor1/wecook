@@ -24,6 +24,24 @@ function addTag() {
 $(document).ready(function () {
   let userexistsOpened = false;
 
+  $("#deleteRecipeConfirm").on("keyup", function(e) {
+
+    var valConfirm = $("#deleteRecipeConfirm").val();
+    var valHidden = $("#deleteRecipeHidden").val();
+
+    if( valConfirm.toLowerCase() == valHidden.toLowerCase() ) {
+      $("#deleteRecipeBtn").removeClass('disabled');
+    } else {
+      $("#deleteRecipeBtn").addClass('disabled');
+    }
+
+  });
+
+  $("#deleteRecipeBtn").on("click", function(e) {
+    console.log("clicked");
+    $("#deleteRecipeForm").submit(); 
+  });
+
   $("#signupUsername").on("change", function () {
     console.log("cajsdlkfjasdlkfj;asdlkfj");
     var data = {};

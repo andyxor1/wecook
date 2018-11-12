@@ -1,0 +1,27 @@
+<div class="modal fade" id="deleteRecipe_<%= recipe.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content recipe_preview">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="recipe_<%= recipe.title %>_title">Are you sure you want to <span class="text-danger">delete</span> <span class="text-warning"><%= recipe.title %></span> ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <p> Please type in the full recipe name below ... </p>
+          <div class="form-group">
+            <input type="text" class="form-control" id="deleteRecipeConfirm" value="" placeholder="Recipe Name ... ">
+            <input type="text" id="deleteRecipeHidden" class="d-none" value="<%= recipe.title %>">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <form id="deleteRecipeForm" action="/recipe/<%=recipe.id%>?_method=DELETE" method="POST">
+          <input type="submit" id="deleteRecipeBtn" class="btn btn-danger disabled" value="Delete">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

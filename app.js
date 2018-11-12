@@ -6,6 +6,7 @@ var path = require('path'); // for specifying path of directory
 var seedDB = require("./seeds");
 // var elasticlunr = require('elasticlunr');
 var passport = require('passport');
+var methodOverride = require('method-override');
 if(false){seedDB();}
 
 
@@ -43,6 +44,7 @@ var appRoutes = require('./routes/app_routes')  // this is just saying include a
 var app = express(); // initialize an express instance, set body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(methodOverride('_method'))
 
 
 // this if else block is so that we could connect to an online mongodb when we need to (mongolabs, AWS dyanamoDB)
