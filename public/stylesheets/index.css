@@ -81,12 +81,12 @@ html {
   display: inline-block;
 }
 
-.sidebar_div {
+/* .sidebar_div {
   background-color: #ccc;
   padding: 20px;
   padding-top: 50px;
   height: 100%;
-}
+} */
 
 
 .recipe_preview img {

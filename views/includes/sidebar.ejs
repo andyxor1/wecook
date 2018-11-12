@@ -1,100 +1,109 @@
-<div class="sidebar_div">
-    <!-- Sidebar -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h1><i class="fas fa-filter mb-3"></i> Filter</h1>
-        </div>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title font-40"><i class="fas fa-filter mb-3"></i> Filters </h5>
+    <div class="">
+      <% include ../includes/nav_search %>
+    </div>
 
-        <ul class="list-unstyled components">
+    <div class="sidebar_div">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h1></h1>
+            </div>
 
-            <li>
-                <ul class="list-unstyled components mb-5">
-                    <h2>UCSD Markets</h2>
+            <ul class="list-unstyled components">
+
+                <li>
+                    <ul class="list-unstyled components mb-5">
+                        <h3> <img src="/icons/store.png" class="d-inline-block img-fluid mr-3" alt=""> <span class="align-middle">Markets </span> </h3>
+                        <li class="active">
+                            <input type="checkbox" id="Earls" name="Earl's" value="Earl's" class="filter">Earl's
+                        </li>
+                        <li>
+                            <input type="checkbox" id="Goodys" name="Goody's" value="Beef" class="filter">Goody's
+                        </li>
+                        <li>
+                            <input type="checkbox" id="Johns" name="John's" value="" class="filter">John's
+                        </li>
+                        <li>
+                            <input type="checkbox" id="Rogers" name="Roger's" value="" class="filter">Roger's
+                        </li>
+                        <li>
+                            <input type="checkbox" id="Sixth" name="Sixth" value="" class="filter">Sixth
+                        </li>
+                        <li>
+                            <input type="checkbox" id="Village" name="Village" value="" class="filter">Village
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                  <ul class="list-unstyled components mb-5">
+                    <h3> <img src="/icons/protein.png" class="d-inline-block img-fluid mr-3" alt=""> <span class="align-middle">Protein </span> </h3>
                     <li class="active">
-                        <input type="checkbox" id="Earls" name="Earl's" value="Earl's" class="filter">Earl's
+                        <input type="checkbox" name="Tofu"  value="Tofu" class="filter">Tofu
                     </li>
                     <li>
-                        <input type="checkbox" id="Goodys" name="Goody's" value="Beef" class="filter">Goody's
+                        <input type="checkbox" name="Beef" value="Beef" class="filter">Beef
                     </li>
                     <li>
-                        <input type="checkbox" id="Johns" name="John's" value="" class="filter">John's
+                        <input type="checkbox" name="Pork" value="" class="filter">Pork
                     </li>
                     <li>
-                        <input type="checkbox" id="Rogers" name="Roger's" value="" class="filter">Roger's
+                        <input type="checkbox" name="Fish"  value="" class="filter">Fish
                     </li>
                     <li>
-                        <input type="checkbox" id="Sixth" name="Sixth" value="" class="filter">Sixth
+                        <input type="checkbox" name="Chicken"  value="" class="filter">Chicken
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <ul class="list-unstyled components mb-5">
+                    <h3> <img src="/icons/dairy.png" class="d-inline-block img-fluid mr-3" alt=""> <span class="align-middle">Dairy </span> </h3>
+                    <li>
+                        <input type="checkbox" name="Cheese"  value="" class="filter">Cheese
                     </li>
                     <li>
-                        <input type="checkbox" id="Village" name="Village" value="" class="filter">Village
+                        <input type="checkbox" name="Milk"  value="" class="filter">Milk
                     </li>
-                </ul>
-            </li>
+                    <li>
+                        <input type="checkbox" name="Goat Milk"  value="" class="filter">Goat Milk
+                    </li>
+                  </ul>
+                </li>
 
 
-            <li>
-              <ul class="list-unstyled components mb-5">
-                <h2>Protein</h2>
-                <li class="active">
-                    <input type="checkbox" name="Tofu"  value="Tofu" class="filter">Tofu
-                </li>
                 <li>
-                    <input type="checkbox" name="Beef" value="Beef" class="filter">Beef
+                  <ul class="list-unstyled components mb-5">
+                    <h3> <img src="/icons/veggies.png" class="d-inline-block img-fluid mr-3" alt=""> <span class="align-middle">Veggies </span> </h3>
+                    <li class="active">
+                        <input type="checkbox" name="Bokchoi"  value="" class="filter">Bokchoi
+                    </li>
+                    <li>
+                        <input type="checkbox" name="Broccoli"  value="" class="filter">Broccoli
+                    </li>
+                    <li>
+                        <input type="checkbox" name="Snowpeas"  value="" class="filter">Snowpeas
+                    </li>
+                    <li>
+                        <input type="checkbox" name="Asparagus" value="" class="filter">Asparagus
+                    </li>
+                    <li>
+                        <input type="checkbox" name="Spinach"  value="" class="filter">Spinach
+                    </li>
+                  </ul>
                 </li>
-                <li>
-                    <input type="checkbox" name="Pork" value="" class="filter">Pork
-                </li>
-                <li>
-                    <input type="checkbox" name="Fish"  value="" class="filter">Fish
-                </li>
-                <li>
-                    <input type="checkbox" name="Chicken"  value="" class="filter">Chicken
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <ul class="list-unstyled components mb-5">
-                <h2>Dairy</h2>
-                <li>
-                    <input type="checkbox" name="Cheese"  value="" class="filter">Cheese
-                </li>
-                <li>
-                    <input type="checkbox" name="Milk"  value="" class="filter">Milk
-                </li>
-                <li>
-                    <input type="checkbox" name="Goat Milk"  value="" class="filter">Goat Milk
-                </li>
-              </ul>
-            </li>
-
-
-            <li>
-              <ul class="list-unstyled components mb-5">
-                <h2>Veggies</h2>
-                <li class="active">
-                    <input type="checkbox" name="Bokchoi"  value="" class="filter">Bokchoi
-                </li>
-                <li>
-                    <input type="checkbox" name="Broccoli"  value="" class="filter">Broccoli
-                </li>
-                <li>
-                    <input type="checkbox" name="Snowpeas"  value="" class="filter">Snowpeas
-                </li>
-                <li>
-                    <input type="checkbox" name="Asparagus" value="" class="filter">Asparagus
-                </li>
-                <li>
-                    <input type="checkbox" name="Spinach"  value="" class="filter">Spinach
-                </li>
-              </ul>
-            </li>
 
 
 
 
 
-        </ul>
-    </nav>
+            </ul>
+        </nav>
 
+    </div>
+  </div>
 </div>

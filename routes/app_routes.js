@@ -186,7 +186,7 @@ router.get('/dashboard/community', function ( req, res, next ) {
     console.log(req.user);
     console.log(req.body);
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
-    res.render('pages/dashboard_community', {
+    res.render('pages/dashboard', {
       recipe_seeds: recipes,
     });
 
@@ -214,7 +214,7 @@ router.delete("/recipe/:id", function( req, res) {
       console.log(err);
       res.redirect("back");
     } else {
-      res.redirect("/account/" + req.user._id); 
+      res.redirect("/account/" + req.user._id);
     }
 
   });
