@@ -1,0 +1,62 @@
+<!-- Modal -->
+<div class="modal fade" id="recipe_<%= recipe.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content recipe_preview">
+      <div class="modal-header">
+        <h5 class="modal-title text-warning" id="recipe_<%= recipe.title %>_title"><%= recipe.title %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <img class="card-img-top img-fluid" src="<%= recipe.picture %>" alt="<%= recipe.title %>">
+            <div class="mt-3">
+              <p class="font-italic font-weight-bold"> <i class="icon mr-2 py-1 font-25 fas fa-tags"></i> Tags </p>
+              <div class="d-flex flex-wrap">
+                <% recipe.tags.forEach(function(tag) { %>
+                    <a href="#" class="mr-2 mb-2 px-2 tag text-dark disabled"><%= tag %></a>
+                <% }); %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 card-text">
+            <p><span class="font-italic font-weight-bold"><i class="icon mr-2 font-25 far fa-clock"></i> Prep Time:</span> <%= recipe.prep_time %> minutes</p>
+            <p><span class="font-italic font-weight-bold"><i class="icon mr-2 font-25 fas fa-clock"></i> Cook Time:</span> <%= recipe.cook_time %> minutes</p>
+
+            <p class="font-italic font-weight-bold"><i class="icon mr-2 font-25 fas fa-info-circle"></i> Description</p>
+            <p class="flex-wrap"><%=recipe.description %></p>
+
+            <div class="row">
+              <div class="col-sm-6 border-right">
+                <p class="font-italic font-weight-bold text-center"><i class="icon mr-2 font-25 fas fa-shopping-basket"></i> Ingredients</p>
+                <hr>
+                <ul>
+                  <% recipe.ingredients.forEach(function(ingredient) { %>
+                      <li><%= ingredient %></li>
+                  <% }); %>
+                </ul>
+
+              </div>
+              <div class="col-sm-6">
+                <p class="font-italic font-weight-bold text-center"><i class="icon mr-2 font-25 fas fa-shoe-prints"></i> Instructions</p>
+                <hr>
+                <ol>
+                  <% recipe.instructions.forEach(function(instruction) { %>
+                      <li><%= instruction %></li>
+                  <% }); %>
+                </ol>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

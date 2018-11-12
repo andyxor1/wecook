@@ -27,6 +27,7 @@ localStorage = new LocalStorage('./scratch');
 router.use(function(req, res, next) {
   console.log(req.user);
   res.locals.currentUser = req.user;
+  res.locals.isIndexPage = false;
   next();
 });
 
@@ -101,6 +102,7 @@ router.get("/logout", function( req, res) {
 });
 
 
+
 router.get('/reset', function( req, res) {
   res.render("pages/reset");
 });
@@ -118,13 +120,17 @@ function isLoggedIn( req, res, next ) {
 // INDEX ROUTES |
 // ------------------
 router.get('/', function(req, res, next) {
-    res.render('index');
+    res.render('index', {
+      currentUser: req.user,
+      isIndexPage: true,
+    });
 });
 
-router.get('/recipe/new', function ( req, res, next ) {
+router.get('/recipe/new', isLoggedIn, function ( req, res, next ) {
     console.log(recipe_tags);
     res.render('pages/new_recipe', {
       recipe_tags: recipe_tags,
+      currentUser: req.user,
     });
 });
 
@@ -136,8 +142,19 @@ router.get('/about', function ( req, res, next ) {
 // ------------------
 // ACCOUNT ROUTES |
 // ------------------
-router.get('/account', function ( req, res, next ) {
-    res.render('pages/account');
+router.get('/account/:id', isLoggedIn, function ( req, res, next ) {
+    User.findById(req.params.id, function(err, user) {
+      if(err) { console.log(err); }
+      console.log(user);
+      Recipe.find({author: user.username}, function(err, recipes) {
+        console.log(recipes)
+        res.render('pages/account_details', {
+          user: user,
+          recipes: recipes,
+          currentUser: req.user
+        });
+      });
+    })
 });
 
 
@@ -160,6 +177,34 @@ router.get('/dashboard', isLoggedIn, function ( req, res, next ) {
 
   });
 });
+
+router.get('/dashboard/community', function ( req, res, next ) {
+
+  Recipe.find(function(err, recipes) {
+    if(err) { console.log(err); }
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
+    console.log(req.user);
+    console.log(req.body);
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
+    res.render('pages/dashboard_community', {
+      recipe_seeds: recipes,
+    });
+
+  });
+});
+router.delete("/recipe/:id", function( req, res) {
+
+  res.send("This is the recipe destory route");
+  // Recipe.findByIdAndRemove(req.params.id, function(err){
+  //   if(err) {
+  //     console.log("called in delete recipe route");
+  //   } else {
+  //     res.redirect("/dashboard")
+  //   }
+  //
+  // });
+});
+
 
 router.get('/recipe/:id', function ( req, res, next ) {
 

@@ -7,22 +7,42 @@
           <span class="h1 title align-bottom">WeCook</span>
         </a>
     </div>
+
       <% if(currentUser) {%>
 
         <ul class="nav justify-content-end float-right">
-
+        <li class="nav-item">
+          <a class="nav-link active text-dark border-right" href="https://goo.gl/forms/Ou9ALwksv7czoxUe2" target="_blank">   <span> <i class="icon fas fa-external-link-alt"></i>  </span> Help us improve!</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link active border-right text-info" href="/recipe/new">   <span> <i class="icon fab fa-creative-commons-share mr-3"></i>  </span> Share a Recipe</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link active text-info border-right" href="#">   <span> <i class="icon fas fa-user-alt mr-3"></i> Signed In As <span class="font-italic text-primary font-weight-bold"><%= currentUser.username %></span> </span> </a>
+          <a class="nav-link active text-info border-right" href="/account/<%= currentUser.id %> ">   <span> <i class="icon fas fa-user-alt mr-3"></i> Signed In As <span class="font-italic text-primary font-weight-bold"><%= currentUser.username %></span> </span> </a>
         </li>
         <li class="nav-item">
           <a class="nav-link active text-warning" href="/logout">   <span> <i class="icon fas fa-sign-out-alt mr-3"></i>  </span> Logout</a>
         </li>
 
       </ul>
+    <% } else { %>
+      <% if (!isIndexPage) { %>
+        <ul class="nav justify-content-end float-right">
+          <li class="nav-item">
+            <a class="nav-link active text-dark border-right" href="https://goo.gl/forms/Ou9ALwksv7czoxUe2" target="_blank">   <span> <i class="icon fas fa-external-link-alt"></i>  </span> Help us improve!</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link active text-info" href="/">   <span> <i class="icon fas fa-sign-in-alt mr-3"></i>  </span> Login</a>
+            </li>
+        </ul>
+      <% } else { %>
+        <ul class="nav justify-content-end float-right">
+          <li class="nav-item">
+            <a class="nav-link active text-dark" href="https://goo.gl/forms/Ou9ALwksv7czoxUe2" target="_blank">   <span> <i class="icon fas fa-external-link-alt"></i>  </span> Help us improve!</a>
+          </li>
+        </ul>
+      <% } %>
     <% } %>
   </nav>
 </div>

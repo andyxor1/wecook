@@ -7,6 +7,33 @@
   return truncated;
 <% }%>
 
+<!--
+<div class="card my-4 recipe_preview border border-warning">
+  <div class="card-body p-2">
+    <div class="">
+      <h5 class="card-title text-warning font-weight-bold"><span class="text-uppercase"><%= recipe.title %> </span> <span class="float-right text-dark"> By: <span class="text-info font-italic "> <%= recipe.author %> </span> </span></h5>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+
+
+        <a href="#" data-toggle="modal" data-target="#recipe_<%= recipe.id %>"><img class="view_img mb-1 img-fluid align-middle" src="<%= recipe.picture%>" alt="<%= recipe.title%>" ></a>
+
+      </div>
+      <div class="col-md-8 p-2">
+        <p class="card-text"><i class="icon mr-2 font-25 fas fa-clock"></i> <%= recipe.cook_time %> minutes</p>
+        <p class="card-text"><i class="icon mr-2 font-25 fas fa-info-circle"></i><%=recipe.description %></p>
+        <div class="d-flex flex-wrap">
+          <i class="icon mr-2 py-1 font-25 fas fa-tags"></i>
+            <% recipe.tags.forEach(function(tag) { %>
+                <a href="#" class="mr-2 mb-2 px-2 tag text-dark"><%= tag %></a>
+            <% }); %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+--> 
 
 <div class="card my-4 recipe_preview">
   <div class="card-header bg-warning">
@@ -17,7 +44,7 @@
       <div class="col-md-4">
         <img class="recipe_preview mb-3 img-fluid" src="<%= recipe.picture%>" alt="<%= recipe.title%>" >
 
-        <a href="/recipe/<%= recipe._id%>" class="btn btn-block btn-outline-danger btn-lg float- mt-2 mb-2"> <i class="fas fa-laugh-beam"></i> View Recipe</a>
+        <a href="#" data-toggle="modal" data-target="#recipe_<%= recipe.id %>" class="btn btn-block btn-outline-danger btn-lg float- mt-2 mb-2"> <i class="fas fa-laugh-beam"></i> View Recipe</a>
 
       </div>
       <div class="col-md-8">
@@ -34,7 +61,5 @@
 
 
   </div>
-  <!-- <div class="card-footer text-muted text-center">
-    2 days ago
-  </div> -->
 </div>
+<%- include('../includes/recipe_modal', {recipe: recipe}); %>

@@ -22,6 +22,10 @@ function addTag() {
 $(document).ready(function() {
   let userexistsOpened = false;
 
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
   $("#signupUsername").on("change", function() {
     console.log("cajsdlkfjasdlkfj;asdlkfj");
     var data = {};
@@ -137,6 +141,11 @@ $(document).ready(function() {
   //
   // })
 
+  $("#community_recipes_btn").click(function() {
+    console.log("called here")
+    $("#home_jumbotron" ).toggle("fold");
+  });
+
 
   $('#search_button').on("click", queryHandle);
     // var searchTerms = $("#search_input").val();
@@ -242,10 +251,5 @@ $(document).ready(function() {
 
       })
   }
-
-
-
-
-
 
 });

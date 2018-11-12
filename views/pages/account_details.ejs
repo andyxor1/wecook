@@ -1,0 +1,50 @@
+<% include ../includes/header %>
+<% include ../includes/nav %>
+
+
+<div class="container mt-5 account">
+
+  <div class="row">
+    <div class="col-md-3">
+
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <h5 class="card-title">Welcome, <wbr> <span class="text-primary">  <%= user.username %> <wbr></span>!</h5>
+            <h6 class="card-subtitle mb-2 text-muted font-italic"> - Newb Cook
+
+            </h6>
+
+
+          </div>
+
+          <p class="card-text"><img src="/pictures/unknown_male.jpg" alt="<%= user.username %>" class="img-fluid profile_pic"></p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <h1>Your Recipes</h1>
+          <hr>
+
+          <div class="row d-flex flex-wrap">
+            <% recipes.forEach(function(recipe) { %>
+              <% console.log(recipe.title); %>
+              <%- include('../includes/recipe_account_card', {recipe: recipe}); %>
+            <% }); %>
+          </div>
+        </div>
+    </div>
+
+
+    </div>
+  </div>
+
+
+</div>
+
+
+<% include ../includes/footer %>
