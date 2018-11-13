@@ -48,7 +48,7 @@ app.use(methodOverride('_method'))
 
 
 // this if else block is so that we could connect to an online mongodb when we need to (mongolabs, AWS dyanamoDB)
-var isLocal = true;
+var isLocal = false; 
 if ( isLocal ) {
   mongoose.connect('mongodb://localhost:27017/wecook', { useNewUrlParser: true });
   console.log("==> Connected to Local Mongo at localhost:27017");
