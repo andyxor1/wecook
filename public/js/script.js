@@ -235,6 +235,14 @@ $(document).ready(function () {
     $.post("/dashboard", pack, function (data, status) {
       console.log(data);
       $("#recipe_result").empty();
+
+      //Check if anything was return at all, if not print message
+
+      if (data.length == 0) {
+          //console.log(data.length);
+          $("#recipe_result").html("Oops, seems like there is no recipe that fits your description, try different tags or key words!!")
+      }
+
       data.forEach(function (d) {
 
         var tags = tagGenerator(d.tags);
