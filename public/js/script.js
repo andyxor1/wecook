@@ -198,6 +198,25 @@ $(document).ready(function () {
   // } else { console.log("no search terms");}
 
   //});
+  //Filter Check the box when clicking the checkbox label
+    $(".filter-link").on("click", function () {
+        //console.log($(this).prev())
+        $(this).prev().trigger("click")
+    });
+
+  //Filter Change color when hover
+  $(".filter-link").hover(function () {
+      //console.log($(this).prev())
+      //Hover in
+      $(this).css('color', 'orange');
+      $(this).css('text-decoration', 'underline');
+    },
+    function () {
+      //Hover out
+      $(this).css('color', 'black');
+      $(this).css('text-decoration', 'none');
+    });
+
 
   //Trigger quary handler when checkbox are clicked
   $(".filter").on("click", queryHandle);
