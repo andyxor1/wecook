@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+var bodyParser = require('body-parser'); // for parsing from HTTP message body
 var bodyParser = require('body-parser');
 var recipe_seeds = require('../json/recipe_seeds.js');
 var recipe_tags = require('../json/recipe_tags.js');
@@ -17,8 +18,34 @@ var LocalStrategy = require('passport-local');
 var User = require("../models/user_model");
 var Recipe = require('../models/recipe_model');
 var Tag = require('../models/tag_model');
-var bodyParser = require('body-parser'); // for parsing from HTTP message body
+var {addPhoto, deletePhoto, readPhoto } = require('../public/js/s3-image.js')
+var multer = require('multer'); // file storing middleware
+var multerS3 = require('multer-s3')
+var aws = require('aws-sdk');
+// var upload = multer({ dest: 'uploads/' })
 
+aws.config.update({ // TODO: DONT STORE KEYS HERE
+  accessKeyId: 'AKIAJO6PH5DOSOVLDSIA',
+  secretAccessKey: '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',
+  region: 'us-east-2',
+});
+
+var s3 = new aws.S3();
+
+var upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'cogs120wecook',
+    metadata: function (req, file, cb) {
+      cb(null, {fieldName: file.fieldname});
+    },
+    key: function (req, file, cb) {
+      // cb(null, Date.now().toString())
+      cb(null, file.originalname)
+      
+    }
+  })
+})
 
 var LocalStorage = require('node-localstorage').LocalStorage,
 localStorage = new LocalStorage('./scratch');
@@ -350,17 +377,29 @@ router.get('/settings', function ( req, res, next ) {
     res.render('pages/settings');
 });
 
-router.post('/add-recipe', async function(req, res) {
+router.post('/add-recipe', upload.single('picture'), function(req, res) {
+    // req.file is the recipe image file
+    // req.body will hold the text fields, if there were any
 
     var recipe = req.body;
-    recipe["picture"] = "/pictures/tofu-stew.jpg";
-
     console.log("Hello---------------------------------------------------------------------------------------------");
-    console.log(recipe);
+    console.log(req.body)
+    console.log("\n\n");
+    console.log(req.file)
+    console.log("\n\n");
+
+    // console.log(req.body['recipeImage'])
+    // console.log(typeof req.body['recipeImage'])
+    // console.log("\n\n");
+
+    // console.log(typeof req.file)
+    // console.log("\n\n");
+    recipe["picture"] = "/pictures/tofu-stew.jpg";
+    
+    // recipe["picture"] = req.body['recipeImage'];
     console.log("Bye---------------------------------------------------------------------------------------------");
-    // debugger;
-    var recipe = req.body;
-    // debugger;
+    
+    // console.log(recipe);
     // Add recipe to DB
     Recipe.create(recipe, function(err, recipe) {
         if(err) {
