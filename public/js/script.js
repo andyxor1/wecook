@@ -24,10 +24,13 @@ function addTag() {
 $(document).ready(function () {
   let userexistsOpened = false;
 
-  $("#deleteRecipeConfirm").on("keyup", function(e) {
+  $(".deleteRecipeConfirm").on("keyup", function(e) {
 
-    var valConfirm = $("#deleteRecipeConfirm").val();
-    var valHidden = $("#deleteRecipeHidden").val();
+    var valConfirm = $("#deleteRecipeConfirm").val().toString();
+    var valHidden = $("#deleteRecipeHidden").val().toString();
+
+    console.log(valConfirm);
+    console.log(valHidden);
 
     if( valConfirm.toLowerCase() == valHidden.toLowerCase() ) {
       $("#deleteRecipeBtn").removeClass('disabled');
@@ -39,7 +42,7 @@ $(document).ready(function () {
 
   $("#deleteRecipeBtn").on("click", function(e) {
     console.log("clicked");
-    $("#deleteRecipeForm").submit(); 
+    $("#deleteRecipeForm").submit();
   });
 
   $("#signupUsername").on("change", function () {

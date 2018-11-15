@@ -126,7 +126,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/recipe/new', isLoggedIn, function ( req, res, next ) {
+router.get('/recipes/new', isLoggedIn, function ( req, res, next ) {
     console.log(recipe_tags);
     res.render('pages/new_recipe', {
       recipe_tags: recipe_tags,
@@ -146,7 +146,7 @@ router.get('/account/:id', isLoggedIn, function ( req, res, next ) {
     User.findById(req.params.id, function(err, user) {
       if(err) { console.log(err); }
       console.log(user);
-      Recipe.find({author: user.username}, function(err, recipes) {
+      Recipe.find({author: user._id}, function(err, recipes) {
         console.log(recipes)
         res.render('pages/account_details', {
           user: user,
@@ -207,9 +207,59 @@ router.get('/recipe/:id', function ( req, res, next ) {
   });
 });
 
-router.delete("/recipe/:id", function( req, res) {
+// for adding a new recipe
+router.post('/recipes', isLoggedIn, async function(req, res) {
+
+    var recipe = req.body.recipe;
+    console.log(recipe)
+    recipe["picture"] = "/pictures/tofu-stew.jpg";
+    var author = req.user;
+    recipe["author"] = author._id ;
+    console.log(req.user)
+    console.log("Hello---------------------------------------------------------------------------------------------");
+    console.log(recipe);
+    console.log("Bye---------------------------------------------------------------------------------------------");
+    // debugger;
+    // var recipe = req.body;
+    // debugger;
+    // Add recipe to DB
+    Recipe.create(recipe, function(err, recipe) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log('RECIPES: ----------> added a recipe: ' + recipe.title);
+            User.findByIdAndUpdate(author._id,
+              { $push: { recipes_owned: recipe._id }},
+              function(err, user) {
+              if(err) {console.log(err);}
+              var recipes_owned = user.recipes_owned;
+              console.log(recipes_owned)
+            });
+
+          }
+    });
+    // re-render
+    res.redirect('/dashboard');
+})
+
+// for deleting the recipe
+router.delete("/recipe/:id", isLoggedIn, function( req, res) {
   console.log("called in recipe destroy route")
   Recipe.findByIdAndRemove(req.params.id, function(err){
+    if(err) {
+      console.log(err);
+      res.redirect("back");
+    } else {
+      res.redirect("/account/" + req.user._id);
+    }
+
+  });
+});
+
+// for updateing the recipe
+router.put("/recipe/:id", isLoggedIn, function( req, res) {
+  console.log("called in recipe update route")
+  Recipe.findByIdAndUpdate(req.params.id, function(err){
     if(err) {
       console.log(err);
       res.redirect("back");
@@ -353,28 +403,7 @@ router.get('/settings', function ( req, res, next ) {
     res.render('pages/settings');
 });
 
-router.post('/add-recipe', async function(req, res) {
 
-    var recipe = req.body;
-    recipe["picture"] = "/pictures/tofu-stew.jpg";
-
-    console.log("Hello---------------------------------------------------------------------------------------------");
-    console.log(recipe);
-    console.log("Bye---------------------------------------------------------------------------------------------");
-    // debugger;
-    var recipe = req.body;
-    // debugger;
-    // Add recipe to DB
-    Recipe.create(recipe, function(err, recipe) {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log('RECIPES: ----------> added a recipe: ' + recipe.title);
-        }
-    });
-    // re-render
-    res.redirect('/dashboard');
-})
 
 
 
