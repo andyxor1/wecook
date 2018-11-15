@@ -218,8 +218,22 @@ $(document).ready(function () {
     });
 
 
-  //Trigger quary handler when checkbox are clicked
+  //Trigger query handler when checkbox are clicked
   $(".filter").on("click", queryHandle);
+
+  //Trigger query handler when hitting enter in search
+  $('#search_input').on('keypress', function (e) {
+      if(e.which === 13){
+
+          //Disable textbox to prevent multiple submit
+          $(this).attr("disabled", "disabled");
+
+          queryHandle();
+
+          //Enable the textbox again if needed.
+          $(this).removeAttr("disabled");
+      }
+  });
 
   //Handler that scan the checkboxes and send their states to POST
 

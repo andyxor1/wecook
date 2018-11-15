@@ -250,7 +250,10 @@ router.post('/dashboard', async function(req, res) {
 
     queryObj = {};
     if(searchTerm != "") {
-      queryObj["title"] = { "$regex": searchTerm, "$options": "i" };
+      //queryObj["title"] = { "$regex": searchTerm, "$options": "i" };
+      //queryObj["ingredients"] = { $all: searchTerm };
+      //queryObj["description"] = { $all: searchTerm };
+      queryObj["$or"] = [ {title:{ "$regex": searchTerm, "$options": "i" }}, {ingredients:{ "$regex": searchTerm, "$options": "i" }},{description:{ "$regex": searchTerm, "$options": "i" }},{tags:{ "$regex": searchTerm, "$options": "i" }} ]
     }
 
     if(searchTags.length != 0) {
