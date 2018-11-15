@@ -296,3 +296,12 @@ $(document).ready(function () {
   }
 
 });
+
+function previewImage() {
+  var recipeImg = document.getElementById('recipeImage');
+  var previewImg = document.querySelector('#recipeImage + img')
+  previewImg.src = window.URL.createObjectURL(recipeImg.files[0]);
+  previewImg.onload = function() {
+    window.URL.revokeObjectURL(this.src);
+  }
+}
