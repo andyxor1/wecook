@@ -24,26 +24,56 @@ function addTag() {
 $(document).ready(function () {
   let userexistsOpened = false;
 
-  $(".deleteRecipeConfirm").on("keyup", function(e) {
+  var deleteModals = $(".delete_recipe_confirm");
+  console.log(deleteModals);
+  if(deleteModals && deleteModals.length > 0) {
+   for(var i = 0; i < deleteModals.length; i++ ) {
+      console.log(deleteModals[i])
+      deleteModals[i].addEventListener("keyup", function(e) {
+        console.log(e);
+        var dModalId =  e.target.id;
+        console.log(dModalId);
+        var id = dModalId.split('_')[1];
+        var hiddenStrInput = "#deleteRecipeHidden_" + id;
+        var hiddenStrBtn = "#deleteRecipeBtn_" + id;
 
-    var valConfirm = $("#deleteRecipeConfirm").val().toString();
-    var valHidden = $("#deleteRecipeHidden").val().toString();
+        console.log(hiddenStrBtn);
 
-    console.log(valConfirm);
-    console.log(valHidden);
+        var valConfirm = $(this).val().toString();
+        var valHidden = $(hiddenStrInput).val().toString();
 
-    if( valConfirm.toLowerCase() == valHidden.toLowerCase() ) {
-      $("#deleteRecipeBtn").removeClass('disabled');
-    } else {
-      $("#deleteRecipeBtn").addClass('disabled');
+        console.log(valConfirm);
+        console.log(valHidden);
+
+        if( valConfirm.toLowerCase() == valHidden.toLowerCase() ) {
+          $(hiddenStrBtn).removeClass('disabled');
+        } else {
+          $(hiddenStrBtn).addClass('disabled');
+        }
+
+        $(hiddenStrBtn).on("click", function(e) {
+          console.log("clicked");
+          $(hiddenStrBtn).submit();
+        });
+      });
     }
+  }
 
-  });
-
-  $("#deleteRecipeBtn").on("click", function(e) {
-    console.log("clicked");
-    $("#deleteRecipeForm").submit();
-  });
+  // $("#deleteRecipeConfirm").on("keyup", function(e) {
+  //
+  //   var valConfirm = $("#deleteRecipeConfirm").val().toString();
+  //   var valHidden = $("#deleteRecipeHidden").val().toString();
+  //
+  //   console.log(valConfirm);
+  //   console.log(valHidden);
+  //
+  //   if( valConfirm.toLowerCase() == valHidden.toLowerCase() ) {
+  //     $("#deleteRecipeBtn").removeClass('disabled');
+  //   } else {
+  //     $("#deleteRecipeBtn").addClass('disabled');
+  //   }
+  //
+  // });
 
   $("#signupUsername").on("change", function () {
     console.log("cajsdlkfjasdlkfj;asdlkfj");

@@ -8,9 +8,9 @@
       <h5 class="card-title text-warning"><%= recipe.title %> </h5>
       <!-- <p class="card-text text-muted font-italic">Created on: </p> -->
 
-      <a href="#" id="editRecipeBtn_<%= recipe.id %>" data-toggle="modal" data-target="#editRecipe_<%= recipe.id %>" class="btn btn-sm btn-warning float-right ml-2"><i class="icon fas fa-edit mr-1"></i> Edit</a>
+      <a href="#" data-toggle="modal" data-target="#editRecipe_<%= recipe.id %>" class="btn btn-sm btn-warning float-right ml-2"><i class="icon fas fa-edit mr-1"></i> Edit</a>
 
-      <a href="#" id="deleteRecipeBtn_<%= recipe.id %>" data-toggle="modal" data-target="#deleteRecipe_<%= recipe.id %>" class="delete_recipe_btn  btn btn-sm btn-danger float-right"><i class="icon fas fa-trash-alt mr-1"></i> Delete</a>
+      <a href="#" data-toggle="modal" data-target="#deleteRecipe_<%= recipe.id %>" class="delete_recipe_btn  btn btn-sm btn-danger float-right"><i class="icon fas fa-trash-alt mr-1"></i> Delete</a>
 
     </div>
   </div>

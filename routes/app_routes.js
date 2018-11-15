@@ -259,7 +259,7 @@ router.delete("/recipe/:id", isLoggedIn, function( req, res) {
 // for updateing the recipe
 router.put("/recipe/:id", isLoggedIn, function( req, res) {
   console.log("called in recipe update route")
-  Recipe.findByIdAndUpdate(req.params.id, function(err){
+  Recipe.findByIdAndUpdate(req.params.id, req.body.recipe, function(err){
     if(err) {
       console.log(err);
       res.redirect("back");
