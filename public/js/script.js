@@ -218,8 +218,22 @@ $(document).ready(function () {
     });
 
 
-  //Trigger quary handler when checkbox are clicked
+  //Trigger query handler when checkbox are clicked
   $(".filter").on("click", queryHandle);
+
+  //Trigger query handler when hitting enter in search
+  $('#search_input').on('keypress', function (e) {
+      if(e.which === 13){
+
+          //Disable textbox to prevent multiple submit
+          $(this).attr("disabled", "disabled");
+
+          queryHandle();
+
+          //Enable the textbox again if needed.
+          $(this).removeAttr("disabled");
+      }
+  });
 
   //Handler that scan the checkboxes and send their states to POST
 
@@ -229,6 +243,22 @@ $(document).ready(function () {
       retStr += '<a href="#" class="mr-2 mb-2 px-2 tag text-dark">' + tag + '</a>';
     });
     return retStr;
+  }
+
+  function ingGenerator(ings) {
+      var retStr = '';
+      ings.forEach(function (ing) {
+          retStr += '<li>' + ing + '</li>';
+      });
+      return retStr;
+  }
+
+  function insGenerator(inss) {
+      var retStr = '';
+      inss.forEach(function (ins) {
+          retStr += '<li>' + ins + '</li>';
+      });
+      return retStr;
   }
 
   function queryHandle() {
@@ -265,6 +295,8 @@ $(document).ready(function () {
       data.forEach(function (d) {
 
         var tags = tagGenerator(d.tags);
+        var ings = ingGenerator(d.ingredients);
+        var inss = insGenerator(d.instructions);
         $("#recipe_result").append('<div class="card my-4 recipe_preview">' +
           '<div class="card-header bg-warning">' +
           '  <h3 class="text-dark text-uppercase font-weight-bold">' + d.title + '</h3>' +
@@ -273,7 +305,7 @@ $(document).ready(function () {
           '    <div class="row">' +
           '      <div class="col-md-4">' +
           '        <img class="recipe_preview mb-3" src="' + d.picture + '" alt="TODO" >' +
-          '        <a href="/recipe/' + d._id + '" class="btn btn-block btn-outline-danger btn-lg float- mt-2 mb-2"> <i class="fas fa-laugh-beam"></i> View Recipe</a>' +
+          '        <a href="#" data-toggle="modal" data-target="#recipe_' + d.id + '" class="btn btn-block btn-outline-danger btn-lg float- mt-2 mb-2"> <i class="fas fa-laugh-beam"></i> View Recipe</a>' +
           '      </div>' +
           '      <div class="col-md-8">' +
           '        <p class="card-text"><i class="icon mr-2 font-25 fas fa-clock"></i>' + d.cook_time + ' minutes</p>' +
@@ -287,9 +319,65 @@ $(document).ready(function () {
 
 
           '  </div>' +
-          '</div>'
+          '</div>' +
 
-        );
+            '<div class="modal fade" id="recipe_' + d.id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
+              '<div class="modal-dialog modal-dialog-centered modal-lg" role="document">' +
+              '<div class="modal-content recipe_preview">' +
+              '<div class="modal-header">' +
+              '<h5 class="modal-title text-warning" id="recipe_' + d.title + '_title">' + d.title + '</h5>' +
+              '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+              '<span aria-hidden="true">&times;</span>' +
+          '</button>' +
+          '</div>' +
+          '<div class="modal-body">' +
+              '<div class="row">' +
+              '<div class="col-sm-4">' +
+              '<img class="card-img-top img-fluid" src="' + d.picture + '" alt="' + d.title + '">' +
+              '<div class="mt-3">' +
+              '<p class="font-italic font-weight-bold"> <i class="icon mr-2 py-1 font-25 fas fa-tags"></i> Tags </p>' +
+          '<div class="d-flex flex-wrap">' +
+              tags +
+      '</div>' +
+          '</div>' +
+          '</div>' +
+          '<div class="col-md-8 card-text">' +
+              '<p><span class="font-italic font-weight-bold"><i class="icon mr-2 font-25 far fa-clock"></i> Prep Time:</span> ' + d.prep_time + ' minutes</p>' +
+              '<p><span class="font-italic font-weight-bold"><i class="icon mr-2 font-25 fas fa-clock"></i> Cook Time:</span> ' + d.prep_time + ' minutes</p>' +
+
+              '<p class="font-italic font-weight-bold"><i class="icon mr-2 font-25 fas fa-info-circle"></i> Description</p>' +
+          '<p class="flex-wrap">' + d.description + '</p>' +
+
+              '<div class="row">' +
+              '<div class="col-sm-6 border-right">' +
+              '<p class="font-italic font-weight-bold text-center"><i class="icon mr-2 font-25 fas fa-shopping-basket"></i> Ingredients</p>' +
+          '<hr>' +
+          '<ul>' +
+          ings +
+      '</ul>' +
+
+          '</div>' +
+          '<div class="col-sm-6">' +
+              '<p class="font-italic font-weight-bold text-center"><i class="icon mr-2 font-25 fas fa-shoe-prints"></i> Instructions</p>' +
+          '<hr>' +
+          '<ol>' +
+           inss +
+      '</ol>' +
+          '</div>' +
+          '</div>' +
+
+
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '<div class="modal-footer">' +
+              '<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>' +
+              '</div>' +
+              '</div>' +
+              '</div>' +
+              '</div>'
+
+      );
       });
 
     })
