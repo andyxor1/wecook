@@ -5,25 +5,39 @@
         <h1 class="card-title text-info"> Share your recipe ...</h1>
         <h6 class="card-subtitle mb-2 text-muted mb-4 font-italic"> your recipe could help a hungry student...</h6>
         <form id="recipeForm" action="/recipes" method="POST">
-        <!-- <form id="recipeForm" action="https://httpbin.org/post" method="POST"> -->
+          <!-- <form id="recipeForm" action="https://httpbin.org/post" method="POST"> -->
           <div class="form-group">
             <span> <i class="icon fas fa-feather-alt mr-3"></i> </span>
             <label for="recipeTitle">Title</label>
             <input type="text" class="mt-2 form-control " name="recipe[title]" id="recipeTitle" aria-describedby="emailHelp"
               placeholder="Enter a unique title for your recipe" required>
           </div>
-
+          <div class="form-group">
+            <!-- <div class="row">
+              <div class="col-md-8"> -->
+                <span> <i class="icon fas fa-feather-alt mr-3"></i> </span>
+                <label for="recipeTitle">Recipe Image</label>
+                <input type="text" class="mt-2 form-control " name="recipe[picture]" id="recipeImage" aria-describedby="emailHelp"
+                placeholder="Enter an image url" required>
+              <!-- </div>
+              <div class="col-md-4">
+                 <img class="recipe_preview mb-3 img-fluid" src="/pictures/camera.png" alt="Your Recipe" >
+              </div>
+            </div> -->
+          </div>
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
                 <span> <i class="icon far fa-clock mr-3"></i> </span>
                 <label for="prepTime">Preperation Time</label>
-                <input type="number" class="mt-2 form-control " name="recipe[prep_time]" id="prepTime" aria-describedby="emailHelp" required>
+                <input type="number" class="mt-2 form-control " name="recipe[prep_time]" id="prepTime" aria-describedby="emailHelp"
+                  required>
               </div>
               <div class="col-md-6">
                 <span> <i class="icon fas fa-clock mr-3"></i> </span>
                 <label for="cookTime">Cooking Time</label>
-                <input type="number" class="mt-2 form-control " name="recipe[cook_time]" id="cookTime" aria-describedby="emailHelp" required>
+                <input type="number" class="mt-2 form-control " name="recipe[cook_time]" id="cookTime" aria-describedby="emailHelp"
+                  required>
               </div>
             </div>
           </div>
@@ -31,57 +45,78 @@
           <div class="form-group">
             <span> <i class="icon fas fa-info-circle mr-3"></i> </span>
             <label for="recipeDescription">Descriptions</label>
-            <textarea class="mt-2 form-control " name="recipe[description]" id="recipeDescription" rows="5" placeholder="Enter a description..." required></textarea>
+            <textarea class="mt-2 form-control " name="recipe[description]" id="recipeDescription" rows="5" placeholder="Enter a description..."
+              required></textarea>
           </div>
 
           <div class="form-group">
             <label for="instructionsList"><i class="icon fas fa-chalkboard-teacher mr-3"></i> Instructions</label>
             <div class="mt-2" id="instructionsList">
               <!-- to be removed later-->
-              <input type="text" class="mb-2 form-control " name="recipe[instructions]" placeholder="Instruction 1" required>
+              <input type="text" class="mb-2 form-control " name="recipe[instructions]" placeholder="Instruction 1"
+                required>
               <input type="text" class="mb-2 form-control " name="recipe[instructions]" placeholder="Instruction 2">
               <input type="text" class="mb-2 form-control " name="recipe[instructions]" placeholder="Instruction 3">
               <input type="text" class="mb-2 form-control " name="recipe[instructions]" placeholder="Instruction 4">
               <input type="text" class="mb-2 form-control " name="recipe[instructions]" placeholder="Instruction 5">
             </div>
-            <input type="button" value="Add another Instruction" onclick="addInstructionField();" ;>
+            <a href="#" class="btn btn-primary mt-2" onclick="addInstructionField()">Add another instruction</a>
           </div>
 
           <div class="form-group">
 
             <label for="ingredientsList"><i class="icon fas fa-mortar-pestle mr-3"></i> Ingredients</label>
             <div class="mt-2" id="ingredientsList">
-              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 1" required>
+              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 1"
+                required>
               <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 2">
               <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 3">
               <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 4">
               <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 5">
             </div>
-            <input type="button" value="Add another Ingredient" onclick="addIngredientField();" ;>
+            <a href="#" class="btn btn-primary mt-2" onclick="addIngredientField()">Add another ingredient</a>
+            
           </div>
 
           <div class="form-group">
             <label for="tagsList"> <i class="icon fas fa-tags mr-3"></i> Select Tags</label>
             <div class="form-check" id="tagList">
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Earl's"> <label class="form-check-label" for="Earl's">Earl's</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Goody's"> <label class="form-check-label" for="Goody's">Goody's</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="John's"> <label class="form-check-label" for="John's">John's</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Roger's"> <label class="form-check-label" for="Roger's">Roger's</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Sixth"> <label class="form-check-label" for="Sixth">Sixth</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Village"> <label class="form-check-label" for="Village">Village</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Tofu"> <label class="form-check-label" for="Tofu">Tofu</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Beef"> <label class="form-check-label" for="Beef">Beef</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Fish"> <label class="form-check-label" for="Fish">Fish</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Chicken"> <label class="form-check-label" for="Chicken">Chicken</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Cheese"> <label class="form-check-label" for="Cheese">Cheese</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Bokchoi"> <label class="form-check-label" for="Bokchoi">Bokchoi</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Broccoli"> <label class="form-check-label" for="Broccoli">Broccoli</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Snowpeas"> <label class="form-check-label" for="Snowpeas">Snowpeas</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Asparagus"> <label class="form-check-label" for="Asparagus">Asparagus</label><br>
-              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Spinach"> <label class="form-check-label" for="Spinach">Spinach</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Earl's"> <label class="form-check-label"
+                for="Earl's">Earl's</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Goody's"> <label class="form-check-label"
+                for="Goody's">Goody's</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="John's"> <label class="form-check-label"
+                for="John's">John's</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Roger's"> <label class="form-check-label"
+                for="Roger's">Roger's</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Sixth"> <label class="form-check-label"
+                for="Sixth">Sixth</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Village"> <label class="form-check-label"
+                for="Village">Village</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Tofu"> <label class="form-check-label"
+                for="Tofu">Tofu</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Beef"> <label class="form-check-label"
+                for="Beef">Beef</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Fish"> <label class="form-check-label"
+                for="Fish">Fish</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Chicken"> <label class="form-check-label"
+                for="Chicken">Chicken</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Cheese"> <label class="form-check-label"
+                for="Cheese">Cheese</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Bokchoi"> <label class="form-check-label"
+                for="Bokchoi">Bokchoi</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Broccoli"> <label class="form-check-label"
+                for="Broccoli">Broccoli</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Snowpeas"> <label class="form-check-label"
+                for="Snowpeas">Snowpeas</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Asparagus"> <label class="form-check-label"
+                for="Asparagus">Asparagus</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Spinach"> <label class="form-check-label"
+                for="Spinach">Spinach</label><br>
             </div>
             <input type="text" class="form-control " id="searchTags" aria-describedby="emailHelp" placeholder="Enter name of tag">
-            <input type="button" value="Add a tag" onclick="addTag();" ;>
+            <a href="#" class="btn btn-primary mt-2" onclick="addTag()">Add another tag</a>
+
 
           </div>
 

@@ -9,7 +9,12 @@
             <label for="recipeTitle">Title</label>
             <input value="<%= recipe.title %>" type="text" class="mt-2 form-control " name="recipe[title]" id="recipeTitle" aria-describedby="emailHelp" placeholder="Enter a unique title for your recipe" required>
           </div>
-
+          <div class="form-group">
+              <span> <i class="icon fas fa-feather-alt mr-3"></i> </span>
+              <label for="recipeTitle">Recipe Image</label>
+              <input value="<%= recipe.picture%>" type="text" class="mt-2 form-control " name="recipe[picture]" id="recipeImage" aria-describedby="emailHelp"
+                placeholder="Enter an image url" required>
+            </div>
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
