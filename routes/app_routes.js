@@ -212,16 +212,13 @@ router.post('/recipes', isLoggedIn, async function(req, res) {
 
     var recipe = req.body.recipe;
     console.log(recipe)
-    recipe["picture"] = "/pictures/tofu-stew.jpg";
+    // recipe["picture"] = "/pictures/tofu-stew.jpg";
     var author = req.user;
     recipe["author"] = author._id ;
-    console.log(req.user)
     console.log("Hello---------------------------------------------------------------------------------------------");
     console.log(recipe);
     console.log("Bye---------------------------------------------------------------------------------------------");
-    // debugger;
-    // var recipe = req.body;
-    // debugger;
+
     // Add recipe to DB
     Recipe.create(recipe, function(err, recipe) {
         if(err) {
@@ -256,7 +253,7 @@ router.delete("/recipe/:id", isLoggedIn, function( req, res) {
   });
 });
 
-// for updateing the recipe
+// for updating the recipe
 router.put("/recipe/:id", isLoggedIn, function( req, res) {
   console.log("called in recipe update route")
   Recipe.findByIdAndUpdate(req.params.id, req.body.recipe, function(err){
