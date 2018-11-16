@@ -1,12 +1,12 @@
 function addInstructionField() {
-  var instructionsList = document.getElementsByName('instructions');
+  var instructionsList = document.getElementsByName('recipe[instructions]');
   var inputField = document.createElement('input');
   document.getElementById("instructionsList").appendChild(inputField);
   inputField.outerHTML = `<input type="text" class="mb-2 form-control " name="instructions" placeholder="Instruction ${instructionsList.length + 1}"></input>`;
 }
 
 function addIngredientField() {
-  var ingredientsList = document.getElementsByName('ingredients');
+  var ingredientsList = document.getElementsByName('recipe[ingredients]');
   var inputField = document.createElement('input');
   document.getElementById("ingredientsList").appendChild(inputField);
   inputField.outerHTML = `<input type="text" class="mb-2 form-control " name="ingredients" placeholder="Ingredient ${ingredientsList.length + 1}"></input>`;
