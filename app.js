@@ -1,4 +1,4 @@
-// "require" is similar to import statements
+ // "require" is similar to import statements
 var express = require('express'); // framework we are working with
 var bodyParser = require('body-parser'); // for parsing from HTTP message body
 var mongoose = require('mongoose'); // for mongo db
