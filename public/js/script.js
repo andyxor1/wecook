@@ -2,21 +2,21 @@ function addInstructionField() {
   var instructionsList = document.getElementsByName('instructions');
   var inputField = document.createElement('input');
   document.getElementById("instructionsList").appendChild(inputField);
-  inputField.outerHTML = `<input type="text" class="mb-2 form-control " name="instructions" placeholder="Instruction ${instructionsList.length + 1}"></input>`;
+  inputField.outerHTML = `<input type="text" class="mb-2 form-control " name="recipe[instructions]" placeholder="Instruction ${instructionsList.length + 1}"></input>`;
 }
 
 function addIngredientField() {
   var ingredientsList = document.getElementsByName('ingredients');
   var inputField = document.createElement('input');
   document.getElementById("ingredientsList").appendChild(inputField);
-  inputField.outerHTML = `<input type="text" class="mb-2 form-control " name="ingredients" placeholder="Ingredient ${ingredientsList.length + 1}"></input>`;
+  inputField.outerHTML = `<input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient ${ingredientsList.length + 1}"></input>`;
 }
 
 function addTag() {
   var tagName = document.getElementById('searchTags').value;
   var newTag = document.createElement('newTag');
   document.getElementById('tagList').appendChild(newTag);
-  newTag.outerHTML = `<input type="checkbox" class="form-check-input" name="tags" value="${tagName}"> <label class="form-check-label" for="${tagName}">${tagName}</label><br>`;
+  newTag.outerHTML = `<input type="checkbox" class="form-check-input" name="recipe[tags]" value="${tagName}"> <label class="form-check-label" for="${tagName}">${tagName}</label><br>`;
   document.getElementById('searchTags').value = '';
 }
 
