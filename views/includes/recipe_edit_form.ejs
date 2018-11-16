@@ -5,7 +5,7 @@
         <form id="recipeForm" action="/recipe/<%=recipe.id%>?_method=PUT" method="POST">
         <!-- <form id="recipeForm" action="https://httpbin.org/post" method="POST"> -->
           <div class="form-group">
-            <span> <i class="icon fas fa-feather-alt mr-3"></i> </span>
+            <span> <i class="icon fas fa-image mr-3"></i> </span>
             <label for="recipeTitle">Title</label>
             <input value="<%= recipe.title %>" type="text" class="mt-2 form-control " name="recipe[title]" id="recipeTitle" aria-describedby="emailHelp" placeholder="Enter a unique title for your recipe" required>
           </div>

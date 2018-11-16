@@ -17,6 +17,10 @@ html {
   pointer-events: none;
 }
 
+.flex-wrap a .recipe_tags {
+  pointer-events: none !important;
+}
+
 /*
 /////////////////////
 // Dashboard Page CSS ////
