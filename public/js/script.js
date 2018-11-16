@@ -273,7 +273,7 @@ $(document).ready(function () {
   function tagGenerator(tags) {
     var retStr = '';
     tags.forEach(function (tag) {
-      retStr += '<a href="#" class="mr-2 mb-2 px-2 tag text-dark">' + tag + '</a>';
+      retStr += '<a class="mr-2 mb-2 px-2 tag text-dark">' + tag + '</a>';
     });
     return retStr;
   }
