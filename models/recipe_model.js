@@ -10,6 +10,7 @@ var RecipeSchema = new Schema({
   description: { type: [String] },
   instructions: { type: [String] },
   author: { type: String },
+  author_name: { type: String },
   tags: { type: [String]},
 });
 

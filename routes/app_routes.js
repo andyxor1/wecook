@@ -215,6 +215,7 @@ router.post('/recipes', isLoggedIn, async function(req, res) {
     // recipe["picture"] = "/pictures/tofu-stew.jpg";
     var author = req.user;
     recipe["author"] = author._id ;
+    recipe["author_name"] = author.username ;
     console.log("Hello---------------------------------------------------------------------------------------------");
     console.log(recipe);
     console.log("Bye---------------------------------------------------------------------------------------------");

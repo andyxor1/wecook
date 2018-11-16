@@ -330,17 +330,16 @@ $(document).ready(function () {
         var tags = tagGenerator(d.tags);
         var ings = ingGenerator(d.ingredients);
         var inss = insGenerator(d.instructions);
-        $("#recipe_result").append('<div class="card my-4 recipe_preview">' +
-          '<div class="card-header bg-warning">' +
-          '  <h3 class="text-dark text-uppercase font-weight-bold">' + d.title + '</h3>' +
+        $("#recipe_result").append('<div class="card my-4 recipe_preview border border-warning">' +
+          '<div class="card-body p-2">' +
+          '<div class="">' + 
+          '  <h5 class="card-title text-primary font-weight-bold"><span class="text-uppercase">'+d.title+'</span> <span class="float-right text-dark"> By: <span class="text-info font-italic ">' + d.author_name + '</span> </span></h5>' +
           '  </div>' +
-          '  <div class="card-body">' +
           '    <div class="row">' +
           '      <div class="col-md-4">' +
-          '        <img class="recipe_preview mb-3" src="' + d.picture + '" alt="TODO" >' +
-          '        <a href="#" data-toggle="modal" data-target="#recipe_' + d.id + '" class="btn btn-block btn-outline-danger btn-lg float- mt-2 mb-2"> <i class="fas fa-laugh-beam"></i> View Recipe</a>' +
+          '        <a href="#" data-toggle="modal" data-target="#recipe_'+d._id+'"><img class="view_img mb-1 img-fluid align-middle" src="' + d.picture + '" alt="'+ d.title +'" ></a>' +
           '      </div>' +
-          '      <div class="col-md-8">' +
+          '      <div class="col-md-8 p-2">' +
           '        <p class="card-text"><i class="icon mr-2 font-25 fas fa-clock"></i>' + d.cook_time + ' minutes</p>' +
           '        <p class="card-text"><i class="icon mr-2 font-25 fas fa-info-circle"></i>' + d.description + '</p>' +
           '        <div class="d-flex flex-wrap">' +
@@ -354,7 +353,7 @@ $(document).ready(function () {
           '  </div>' +
           '</div>' +
 
-            '<div class="modal fade" id="recipe_' + d.id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
+            '<div class="modal fade" id="recipe_' + d._id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
               '<div class="modal-dialog modal-dialog-centered modal-lg" role="document">' +
               '<div class="modal-content recipe_preview">' +
               '<div class="modal-header">' +
