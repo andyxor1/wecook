@@ -5,22 +5,27 @@
         <form id="recipeForm" action="/recipe/<%=recipe.id%>?_method=PUT" method="POST">
         <!-- <form id="recipeForm" action="https://httpbin.org/post" method="POST"> -->
           <div class="form-group">
-            <span> <i class="icon fas fa-feather-alt mr-3"></i> </span>
+            <span> <i class="icon fas fa-image mr-3"></i> </span>
             <label for="recipeTitle">Title</label>
-            <input value="<%= recipe.title %>" type="text" class="mt-2 form-control " name="title" id="recipeTitle" aria-describedby="emailHelp" placeholder="Enter a unique title for your recipe" required>
+            <input value="<%= recipe.title %>" type="text" class="mt-2 form-control " name="recipe[title]" id="recipeTitle" aria-describedby="emailHelp" placeholder="Enter a unique title for your recipe" required>
           </div>
-
+          <div class="form-group">
+              <span> <i class="icon fas fa-feather-alt mr-3"></i> </span>
+              <label for="recipeTitle">Recipe Image</label>
+              <input value="<%= recipe.picture%>" type="text" class="mt-2 form-control " name="recipe[picture]" id="recipeImage" aria-describedby="emailHelp"
+                placeholder="Enter an image url" required>
+            </div>
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
                 <span> <i class="icon far fa-clock mr-3"></i> </span>
-                <label for="prepTime">Preperation Time</label>
-                <input value="<%= recipe.prep_time %>" type="number" class="mt-2 form-control " name="prep_time" id="prepTime" aria-describedby="emailHelp" required>
+                <label for="prepTime">Preperation Time (minutes)</label>
+                <input value="<%= recipe.prep_time %>" type="number" class="mt-2 form-control " name="recipe[prep_time]" id="prepTime" aria-describedby="emailHelp" required>
               </div>
               <div class="col-md-6">
                 <span> <i class="icon fas fa-clock mr-3"></i> </span>
-                <label for="cookTime">Cooking Time</label>
-                <input value="<%= recipe.cook_time %>" type="number" class="mt-2 form-control " name="cook_time" id="cookTime" aria-describedby="emailHelp" required>
+                <label for="cookTime">Cooking Time (minutes)</label>
+                <input value="<%= recipe.cook_time %>" type="number" class="mt-2 form-control " name="recipe[cook_time]" id="cookTime" aria-describedby="emailHelp" required>
               </div>
             </div>
           </div>
@@ -28,7 +33,7 @@
           <div class="form-group">
             <span> <i class="icon fas fa-info-circle mr-3"></i> </span>
             <label for="recipeDescription">Descriptions</label>
-            <textarea class="mt-2 form-control" name="description" id="recipeDescription" rows="5" placeholder="Enter a description..." required><%= recipe.description %></textarea>
+            <textarea class="mt-2 form-control" name="recipe[description]" id="recipeDescription" rows="5" placeholder="Enter a description..." required><%= recipe.description %></textarea>
           </div>
 
           <div class="form-group">
@@ -37,7 +42,7 @@
               <!-- to be removed later-->
 
               <% for(var i = 0; i < recipe.instructions.length; i++) { %>
-                    <input value="<%= recipe.instructions[i] %>" type="text" class="mb-2 form-control" name="instructions" placeholder="Instruction <%= i+1 %>" required>
+                    <input value="<%= recipe.instructions[i] %>" type="text" class="mb-2 form-control" name="recipe[instructions]" placeholder="Instruction <%= i+1 %>" required>
               <% } %>
 
             </div>
@@ -49,7 +54,7 @@
             <label for="ingredientsList"><i class="icon fas fa-mortar-pestle mr-3"></i> Ingredients</label>
             <div class="mt-2" id="ingredientsList">
               <% for(var i = 0; i < recipe.ingredients.length; i++) { %>
-                    <input value="<%= recipe.ingredients[i] %>" type="text" class="mb-2 form-control" name="ingredients" placeholder="Ingredient <%= i+1 %>" required>
+                    <input value="<%= recipe.ingredients[i] %>" type="text" class="mb-2 form-control" name="recipe[ingredients]" placeholder="Ingredient <%= i+1 %>" required>
               <% } %>
             </div>
 
@@ -59,22 +64,22 @@
           <div class="form-group">
             <label for="tagsList"> <i class="icon fas fa-tags mr-3"></i> Select Tags</label>
             <div class="form-check" id="tagList">
-              <input type="checkbox" class="form-check-input" name="tags" value="Earl's"> <label class="form-check-label" for="Earl's">Earl's</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Goody's"> <label class="form-check-label" for="Goody's">Goody's</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="John's"> <label class="form-check-label" for="John's">John's</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Roger's"> <label class="form-check-label" for="Roger's">Roger's</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Sixth"> <label class="form-check-label" for="Sixth">Sixth</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Village"> <label class="form-check-label" for="Village">Village</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Tofu"> <label class="form-check-label" for="Tofu">Tofu</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Beef"> <label class="form-check-label" for="Beef">Beef</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Fish"> <label class="form-check-label" for="Fish">Fish</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Chicken"> <label class="form-check-label" for="Chicken">Chicken</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Cheese"> <label class="form-check-label" for="Cheese">Cheese</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Bokchoi"> <label class="form-check-label" for="Bokchoi">Bokchoi</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Broccoli"> <label class="form-check-label" for="Broccoli">Broccoli</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Snowpeas"> <label class="form-check-label" for="Snowpeas">Snowpeas</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Asparagus"> <label class="form-check-label" for="Asparagus">Asparagus</label><br>
-              <input type="checkbox" class="form-check-input" name="tags" value="Spinach"> <label class="form-check-label" for="Spinach">Spinach</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Earl's"> <label class="form-check-label" for="Earl's">Earl's</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Goody's"> <label class="form-check-label" for="Goody's">Goody's</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="John's"> <label class="form-check-label" for="John's">John's</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Roger's"> <label class="form-check-label" for="Roger's">Roger's</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Sixth"> <label class="form-check-label" for="Sixth">Sixth</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Village"> <label class="form-check-label" for="Village">Village</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Tofu"> <label class="form-check-label" for="Tofu">Tofu</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Beef"> <label class="form-check-label" for="Beef">Beef</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Fish"> <label class="form-check-label" for="Fish">Fish</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Chicken"> <label class="form-check-label" for="Chicken">Chicken</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Cheese"> <label class="form-check-label" for="Cheese">Cheese</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Bokchoi"> <label class="form-check-label" for="Bokchoi">Bokchoi</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Broccoli"> <label class="form-check-label" for="Broccoli">Broccoli</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Snowpeas"> <label class="form-check-label" for="Snowpeas">Snowpeas</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Asparagus"> <label class="form-check-label" for="Asparagus">Asparagus</label><br>
+              <input type="checkbox" class="form-check-input" name="recipe[tags]" value="Spinach"> <label class="form-check-label" for="Spinach">Spinach</label><br>
             </div>
             <input type="text" class="form-control mt-2" id="searchTags" aria-describedby="emailHelp" placeholder="Enter name of tag">
             <a href="#" class="btn btn-primary mt-2" onclick="addTag()">Add another tag</a>

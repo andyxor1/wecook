@@ -12,14 +12,14 @@
 
           <p> Please type in the full recipe name below ... </p>
           <div class="form-group">
-            <input type="text" class="form-control" id="deleteRecipeConfirm" value="" placeholder="Recipe Name ... ">
-            <input type="text" id="deleteRecipeHidden" class="d-none" value="<%= recipe.title %>">
+            <input type="text" class="delete_recipe_confirm form-control" id="deleteRecipeConfirm_<%=recipe.id%>" value="" placeholder="Recipe Name ... ">
+            <input type="text" id="deleteRecipeHidden_<%= recipe.id%>" class="d-none" value="<%= recipe.title %>">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <form id="deleteRecipeForm" action="/recipe/<%=recipe.id%>?_method=DELETE" method="POST">
-          <input type="submit" id="deleteRecipeBtn" class="btn btn-danger disabled" value="Delete">
+          <input id="deleteRecipeBtn_<%= recipe.id %>" type="submit"  class="btn btn-danger disabled" value="Delete">
         </form>
       </div>
     </div>

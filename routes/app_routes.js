@@ -250,40 +250,36 @@ router.get('/recipe/:id', function (req, res, next) {
 });
 
 // for adding a new recipe
-router.post('/recipes', isLoggedIn, upload.single('picture'), function (req, res) {
+router.post('/recipes', isLoggedIn, upload.single('picture'), async function(req, res) {
 
-  var recipe = req.body.recipe;
-  console.log(req.user)
-  console.log("Hello---------------------------------------------------------------------------------------------");
-  console.log(req.body)
-  console.log("\n\n");
-  console.log(req.file)
-  console.log("\n\n");
-  console.log(recipe);
-  console.log("Bye---------------------------------------------------------------------------------------------");
-  recipe["picture"] = "/pictures/tofu-stew.jpg";
-  var author = req.user;
-  recipe["author"] = author._id;
-  console.log(recipe)
+    var recipe = req.body.recipe;
+    console.log(recipe)
+    // recipe["picture"] = "/pictures/tofu-stew.jpg";
+    var author = req.user;
+    recipe["author"] = author._id ;
+    recipe["author_name"] = author.username ;
+    console.log("Hello---------------------------------------------------------------------------------------------");
+    console.log(recipe);
+    console.log("Bye---------------------------------------------------------------------------------------------");
 
-  // Add recipe to DB
-  Recipe.create(recipe, function (err, recipe) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('RECIPES: ----------> added a recipe: ' + recipe.title);
-      User.findByIdAndUpdate(author._id,
-        { $push: { recipes_owned: recipe._id } },
-        function (err, user) {
-          if (err) { console.log(err); }
-          var recipes_owned = user.recipes_owned;
-          console.log(recipes_owned)
-        });
+    // Add recipe to DB
+    Recipe.create(recipe, function(err, recipe) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log('RECIPES: ----------> added a recipe: ' + recipe.title);
+            User.findByIdAndUpdate(author._id,
+              { $push: { recipes_owned: recipe._id }},
+              function(err, user) {
+              if(err) {console.log(err);}
+              var recipes_owned = user.recipes_owned;
+              console.log(recipes_owned)
+            });
 
-    }
-  });
-  // re-render
-  res.redirect('/dashboard');
+          }
+    });
+    // re-render
+    res.redirect('/dashboard');
 })
 
 // for deleting the recipe
@@ -301,10 +297,10 @@ router.delete("/recipe/:id", isLoggedIn, function (req, res) {
 });
 
 // for updating the recipe
-router.put("/recipe/:id", isLoggedIn, function (req, res) {
+router.put("/recipe/:id", isLoggedIn, function( req, res) {
   console.log("called in recipe update route")
-  Recipe.findByIdAndUpdate(req.params.id, function (err) {
-    if (err) {
+  Recipe.findByIdAndUpdate(req.params.id, req.body.recipe, function(err){
+    if(err) {
       console.log(err);
       res.redirect("back");
     } else {

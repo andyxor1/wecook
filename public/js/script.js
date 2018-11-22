@@ -1,22 +1,22 @@
 function addInstructionField() {
-  var instructionsList = document.getElementsByName('instructions');
+  var instructionsList = document.getElementsByName('recipe[instructions]');
   var inputField = document.createElement('input');
   document.getElementById("instructionsList").appendChild(inputField);
-  inputField.outerHTML = `<input type="text" class="mb-2 form-control " name="instructions" placeholder="Instruction ${instructionsList.length + 1}"></input>`;
+  inputField.outerHTML = `<input type="text" class="mb-2 form-control " name="recipe[instructions]" placeholder="Instruction ${instructionsList.length + 1}"></input>`;
 }
 
 function addIngredientField() {
-  var ingredientsList = document.getElementsByName('ingredients');
+  var ingredientsList = document.getElementsByName('recipe[ingredients]');
   var inputField = document.createElement('input');
   document.getElementById("ingredientsList").appendChild(inputField);
-  inputField.outerHTML = `<input type="text" class="mb-2 form-control " name="ingredients" placeholder="Ingredient ${ingredientsList.length + 1}"></input>`;
+  inputField.outerHTML = `<input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient ${ingredientsList.length + 1}"></input>`;
 }
 
 function addTag() {
   var tagName = document.getElementById('searchTags').value;
   var newTag = document.createElement('newTag');
   document.getElementById('tagList').appendChild(newTag);
-  newTag.outerHTML = `<input type="checkbox" class="form-check-input" name="tags" value="${tagName}"> <label class="form-check-label" for="${tagName}">${tagName}</label><br>`;
+  newTag.outerHTML = `<input type="checkbox" class="form-check-input" name="recipe[tags]" value="${tagName}"> <label class="form-check-label" for="${tagName}">${tagName}</label><br>`;
   document.getElementById('searchTags').value = '';
 }
 
@@ -24,26 +24,56 @@ function addTag() {
 $(document).ready(function () {
   let userexistsOpened = false;
 
-  $(".deleteRecipeConfirm").on("keyup", function(e) {
+  var deleteModals = $(".delete_recipe_confirm");
+  console.log(deleteModals);
+  if(deleteModals && deleteModals.length > 0) {
+   for(var i = 0; i < deleteModals.length; i++ ) {
+      console.log(deleteModals[i])
+      deleteModals[i].addEventListener("keyup", function(e) {
+        console.log(e);
+        var dModalId =  e.target.id;
+        console.log(dModalId);
+        var id = dModalId.split('_')[1];
+        var hiddenStrInput = "#deleteRecipeHidden_" + id;
+        var hiddenStrBtn = "#deleteRecipeBtn_" + id;
 
-    var valConfirm = $("#deleteRecipeConfirm").val().toString();
-    var valHidden = $("#deleteRecipeHidden").val().toString();
+        console.log(hiddenStrBtn);
 
-    console.log(valConfirm);
-    console.log(valHidden);
+        var valConfirm = $(this).val().toString();
+        var valHidden = $(hiddenStrInput).val().toString();
 
-    if( valConfirm.toLowerCase() == valHidden.toLowerCase() ) {
-      $("#deleteRecipeBtn").removeClass('disabled');
-    } else {
-      $("#deleteRecipeBtn").addClass('disabled');
+        console.log(valConfirm);
+        console.log(valHidden);
+
+        if( valConfirm.toLowerCase() == valHidden.toLowerCase() ) {
+          $(hiddenStrBtn).removeClass('disabled');
+        } else {
+          $(hiddenStrBtn).addClass('disabled');
+        }
+
+        $(hiddenStrBtn).on("click", function(e) {
+          console.log("clicked");
+          $(hiddenStrBtn).submit();
+        });
+      });
     }
+  }
 
-  });
-
-  $("#deleteRecipeBtn").on("click", function(e) {
-    console.log("clicked");
-    $("#deleteRecipeForm").submit();
-  });
+  // $("#deleteRecipeConfirm").on("keyup", function(e) {
+  //
+  //   var valConfirm = $("#deleteRecipeConfirm").val().toString();
+  //   var valHidden = $("#deleteRecipeHidden").val().toString();
+  //
+  //   console.log(valConfirm);
+  //   console.log(valHidden);
+  //
+  //   if( valConfirm.toLowerCase() == valHidden.toLowerCase() ) {
+  //     $("#deleteRecipeBtn").removeClass('disabled');
+  //   } else {
+  //     $("#deleteRecipeBtn").addClass('disabled');
+  //   }
+  //
+  // });
 
   $("#signupUsername").on("change", function () {
     console.log("cajsdlkfjasdlkfj;asdlkfj");
@@ -243,7 +273,7 @@ $(document).ready(function () {
   function tagGenerator(tags) {
     var retStr = '';
     tags.forEach(function (tag) {
-      retStr += '<a href="#" class="mr-2 mb-2 px-2 tag text-dark">' + tag + '</a>';
+      retStr += '<a class="mr-2 mb-2 px-2 tag text-dark">' + tag + '</a>';
     });
     return retStr;
   }
@@ -300,17 +330,16 @@ $(document).ready(function () {
         var tags = tagGenerator(d.tags);
         var ings = ingGenerator(d.ingredients);
         var inss = insGenerator(d.instructions);
-        $("#recipe_result").append('<div class="card my-4 recipe_preview">' +
-          '<div class="card-header bg-warning">' +
-          '  <h3 class="text-dark text-uppercase font-weight-bold">' + d.title + '</h3>' +
+        $("#recipe_result").append('<div class="card my-4 recipe_preview border border-warning">' +
+          '<div class="card-body p-2">' +
+          '<div class="">' + 
+          '  <h5 class="card-title text-primary font-weight-bold"><span class="text-uppercase">'+d.title+'</span> <span class="float-right text-dark"> By: <span class="text-info font-italic ">' + d.author_name + '</span> </span></h5>' +
           '  </div>' +
-          '  <div class="card-body">' +
           '    <div class="row">' +
           '      <div class="col-md-4">' +
-          '        <img class="recipe_preview mb-3" src="' + d.picture + '" alt="TODO" >' +
-          '        <a href="#" data-toggle="modal" data-target="#recipe_' + d.id + '" class="btn btn-block btn-outline-danger btn-lg float- mt-2 mb-2"> <i class="fas fa-laugh-beam"></i> View Recipe</a>' +
+          '        <a href="#" data-toggle="modal" data-target="#recipe_'+d._id+'"><img class="view_img mb-1 img-fluid align-middle" src="' + d.picture + '" alt="'+ d.title +'" ></a>' +
           '      </div>' +
-          '      <div class="col-md-8">' +
+          '      <div class="col-md-8 p-2">' +
           '        <p class="card-text"><i class="icon mr-2 font-25 fas fa-clock"></i>' + d.cook_time + ' minutes</p>' +
           '        <p class="card-text"><i class="icon mr-2 font-25 fas fa-info-circle"></i>' + d.description + '</p>' +
           '        <div class="d-flex flex-wrap">' +
@@ -324,7 +353,7 @@ $(document).ready(function () {
           '  </div>' +
           '</div>' +
 
-            '<div class="modal fade" id="recipe_' + d.id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
+            '<div class="modal fade" id="recipe_' + d._id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
               '<div class="modal-dialog modal-dialog-centered modal-lg" role="document">' +
               '<div class="modal-content recipe_preview">' +
               '<div class="modal-header">' +
