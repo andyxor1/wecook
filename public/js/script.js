@@ -415,4 +415,10 @@ $(document).ready(function () {
     })
   }
 
+  //Click the recipe card to open modal
+  $("#recipe_result").on("click","div.card-body.p-2" , function() {
+       //console.log($(this).parent().next());
+      $(this).parent().next().modal()
+  })
+
 });
