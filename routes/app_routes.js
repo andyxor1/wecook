@@ -18,49 +18,6 @@ var LocalStrategy = require('passport-local');
 var User = require("../models/user_model");
 var Recipe = require('../models/recipe_model');
 var Tag = require('../models/tag_model');
-var { addPhoto, deletePhoto, readPhoto } = require('../public/js/s3-image.js')
-var multer = require('multer'); // file storing middleware
-var multerS3 = require('multer-s3')
-var aws = require('aws-sdk');
-var env = require('../s3.env.js'); // store access keys and do not upload to public
-// var upload = multer({ dest: 'uploads/' })
-
-aws.config.update({ // TODO: DONT STORE KEYS HERE
-  accessKeyId: env.accessKeyId,
-  secretAccessKey: env.secretAccessKey,
-  region: env.region,
-});
-
-var s3 = new aws.S3({
-  apiVersion: '2006-03-01',
-  params: { Bucket: 'cogs120wecook' }
-});
-
-/*
- // Fetch or read data from aws s3
-    s3.getObject({ Key: photoKey }, function (err, data) {
-        if (err) {
-            return console.error('There was an error reading your photo: ', err.message);
-        }
-        console.log('Successfully read photo.');
-        return data;
-    });
-*/
-
-var upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'cogs120wecook',
-    metadata: function (req, file, cb) {
-      cb(null, { fieldName: file.fieldname });
-    },
-    key: function (req, file, cb) {
-      // cb(null, Date.now().toString())
-      cb(null, file.originalname);
-
-    }
-  })
-})
 
 var LocalStorage = require('node-localstorage').LocalStorage,
   localStorage = new LocalStorage('./scratch');
@@ -250,7 +207,7 @@ router.get('/recipe/:id', function (req, res, next) {
 });
 
 // for adding a new recipe
-router.post('/recipes', isLoggedIn, upload.single('picture'), async function(req, res) {
+router.post('/recipes', isLoggedIn, async function(req, res) {
 
     var recipe = req.body.recipe;
     console.log(recipe)
@@ -258,9 +215,9 @@ router.post('/recipes', isLoggedIn, upload.single('picture'), async function(req
     var author = req.user;
     recipe["author"] = author._id ;
     recipe["author_name"] = author.username ;
-    console.log("Hello---------------------------------------------------------------------------------------------");
-    console.log(recipe);
-    console.log("Bye---------------------------------------------------------------------------------------------");
+    // console.log("Hello---------------------------------------------------------------------------------------------");
+    // console.log(recipe);
+    // console.log("Bye---------------------------------------------------------------------------------------------");
 
     // Add recipe to DB
     Recipe.create(recipe, function(err, recipe) {
