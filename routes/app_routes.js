@@ -10,6 +10,10 @@ var nlp = require('compromise')
 // "require" is similar to import statements
 var mongoose = require('mongoose'); // for mongo db
 var path = require('path'); // for specifying path of directory
+var multer = require('multer')
+
+var storage = multer.memoryStorage()
+var upload = multer({ storage: storage })
 
 // Authentications
 var passport = require('passport');
@@ -207,16 +211,17 @@ router.get('/recipe/:id', function (req, res, next) {
 });
 
 // for adding a new recipe
-router.post('/recipes', isLoggedIn, async function(req, res) {
+router.post('/recipes', isLoggedIn, function(req, res) {
 
     var recipe = req.body.recipe;
-    console.log(recipe)
     // recipe["picture"] = "/pictures/tofu-stew.jpg";
     var author = req.user;
+    // console.log("Hello---------------------------------------------------------------------------------------------");
+    // console.log(req.body)
+    // console.log(recipe);
+    // console.log(req.user);
     recipe["author"] = author._id ;
     recipe["author_name"] = author.username ;
-    // console.log("Hello---------------------------------------------------------------------------------------------");
-    // console.log(recipe);
     // console.log("Bye---------------------------------------------------------------------------------------------");
 
     // Add recipe to DB

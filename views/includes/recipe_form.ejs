@@ -5,26 +5,25 @@
         <h1 class="card-title text-info"> Share your recipe ...</h1>
         <h6 class="card-subtitle mb-2 text-muted mb-4 font-italic"> your recipe could help a hungry student...</h6>
         <form id="recipeForm" action="/recipes" method="POST" enctype="multipart/form-data">
-            <!-- <form id="recipeForm" action="https://httpbin.org/post" method="POST" enctype="multipart/form-data"> -->
-          <div class="form-group" style="text-align: center">
-              <label for="recipeImage">Choose recipe image</label>
-              <input type="file" id="recipeImage" name="picture" accept=".jpg, .jpeg, .png" onchange="previewImage();">
-              <img src="/icons/camera.svg" height="200" alt="Image preview">
-            </div>
+          <!-- <form id="recipeForm" action="https://httpbin.org/post" method="POST" enctype="multipart/form-data"> -->
           <div class="form-group">
             <span> <i class="icon fas fa-feather-alt mr-3"></i> </span>
             <label for="recipeTitle">Title</label>
             <input type="text" class="mt-2 form-control " name="recipe[title]" id="recipeTitle" aria-describedby="emailHelp"
               placeholder="Enter a unique title for your recipe" required>
           </div>
-          <div class="form-group">
-            <!-- <div class="row">
-              <div class="col-md-8"> -->
-                <span> <i class="icon far fa-image mr-3"></i> </span>
-                <label for="recipeTitle">Recipe Image</label>
-                <input type="text" class="mt-2 form-control " name="recipe[picture]" id="recipeImage" aria-describedby="emailHelp"
-                placeholder="Enter an image url" required>
+          <div class="form-group" style="text-align: center">
+            <label for="recipeImage">Choose recipe image</label>
+            <input type="file" class="mt-2 form-control " aria-describedby="emailHelp" id="recipeImageUpload" accept=".jpg, .jpeg, .png" onchange="previewImageUpload();">
+            <img src="/icons/camera.svg" height="200" alt="Image preview">
           </div>
+          <div class="form-group">
+            <span> <i class="icon far fa-image mr-3"></i> </span>
+            <label for="recipeTitle">Recipe Image</label>
+            <input type="text" class="mt-2 form-control " id="recipeImageURL" aria-describedby="emailHelp"
+              placeholder="Enter an image url" required>
+          </div>
+          <input type="hidden" name="recipe[picture]" id="recipeImage">
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
@@ -75,7 +74,7 @@
               <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 5">
             </div>
             <a class="btn btn-primary mt-2" onclick="addIngredientField()">Add another ingredient</a>
-            
+
           </div>
 
           <div class="form-group">
@@ -126,7 +125,7 @@
                 Cancel</a>
             </div>
             <div class="col-md-6">
-              <button type="submit" class="btn-lg btn-block btn-info float-right"> <span> <i class="icon fas fa-paper-plane mr-3"></i>
+              <button type="button" class="btn-lg btn-block btn-info float-right" onclick="uploadImage();"> <span> <i class="icon fas fa-paper-plane mr-3"></i>
                 </span> Submit</button>
             </div>
           </div>
