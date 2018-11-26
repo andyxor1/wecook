@@ -7,7 +7,8 @@ var UserSchema = new mongoose.Schema({
   username: { type: String, unique: true },
   password: { type: String },
   email   : { type: String },
-  recipes_owned: {type: [Schema.Types.ObjectId], ref: "Recipe"}
+  recipes_owned: {type: [Schema.Types.ObjectId], ref: "Recipe"},
+  recipes_liked: {type: [String] }
 });
 
 UserSchema.plugin(passportLocalMongoose);

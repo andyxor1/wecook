@@ -20,10 +20,62 @@ function addTag() {
   document.getElementById('searchTags').value = '';
 }
 
+function addLikeListener() {
+  let recipes_liked = $(".recipes_liked");
+  if(recipes_liked && recipes_liked.length > 0) {
+   for(var i = 0; i < recipes_liked.length; i++ ) {
+      console.log(recipes_liked[i])
+      recipes_liked[i].addEventListener("click", function(e) {
+        var recipeLikeBtn = e.target.id;
+        console.log(e.target)
+        var recipeId = e.target.id.split('_')[1];
+        console.log(recipeId);
+        if($(this).hasClass("btn-outline-dark")) {
+          recipeIsLiked = true;
+
+        } else if ($(this).hasClass("btn-success")){
+          recipeIsLiked = false;
+        }
+        var data = {};
+        data.recipeIsLiked = recipeIsLiked;
+        $.ajax({
+          type: "PUT",
+          url: "/users/recipes/"+recipeId,
+          data: data,
+          crossDomain: true,
+          datatype: "json",
+          async: true,
+          success: function (returns) {
+            console.log("called in the success page")
+            console.log(returns)
+            var tempBtn = $("#"+recipeLikeBtn);
+            if (returns.msg && returns.msg === "liked") {
+              console.log("in if")
+              console.log($(this))
+              tempBtn.removeClass("btn-outline-dark").addClass("btn-success");
+              tempBtn.siblings().removeClass("text-dark").addClass("text-danger");
+            } else {
+              console.log("in else")
+              tempBtn.removeClass("btn-success").addClass("btn-outline-dark");
+              tempBtn.siblings().removeClass("text-danger").addClass("text-dark");
+            }
+          },
+          error: function (xhr, ajaxOptions, errThrown) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+            console.log(errThrown);
+            alert("An error occured, please try again.");
+          }
+      });
+    })
+  }
+}
+}
+
 
 $(document).ready(function () {
   let userexistsOpened = false;
-
+  let recipeIsLiked = false;
   var deleteModals = $(".delete_recipe_confirm");
   console.log(deleteModals);
   if(deleteModals && deleteModals.length > 0) {
@@ -74,6 +126,58 @@ $(document).ready(function () {
   //   }
   //
   // });
+  // this function listens to likes by users
+//   let recipes_liked = $(".recipes_liked");
+//   if(recipes_liked && recipes_liked.length > 0) {
+//    for(var i = 0; i < recipes_liked.length; i++ ) {
+//       console.log(recipes_liked[i])
+//       recipes_liked[i].addEventListener("click", function(e) {
+//         var recipeLikeBtn = e.target.id;
+//         console.log(e.target)
+//         var recipeId = e.target.id.split('_')[1];
+//         console.log(recipeId);
+//         if($(this).hasClass("btn-outline-dark")) {
+//           recipeIsLiked = true;
+//
+//         } else if ($(this).hasClass("btn-success")){
+//           recipeIsLiked = false;
+//         }
+//         var data = {};
+//         data.recipeIsLiked = recipeIsLiked;
+//         $.ajax({
+//           type: "PUT",
+//           url: "/users/recipes/"+recipeId,
+//           data: data,
+//           crossDomain: true,
+//           datatype: "json",
+//           async: true,
+//           success: function (returns) {
+//             console.log("called in the success page")
+//             console.log(returns)
+//             var tempBtn = $("#"+recipeLikeBtn);
+//             if (returns.msg && returns.msg === "liked") {
+//               console.log("in if")
+//               console.log($(this))
+//               tempBtn.removeClass("btn-outline-dark").addClass("btn-success");
+//               tempBtn.siblings().removeClass("text-dark").addClass("text-danger");
+//             } else {
+//               console.log("in else")
+//               tempBtn.removeClass("btn-success").addClass("btn-outline-dark");
+//               tempBtn.siblings().removeClass("text-danger").addClass("text-dark");
+//             }
+//           },
+//           error: function (xhr, ajaxOptions, errThrown) {
+//             console.log(xhr.status);
+//             console.log(xhr.responseText);
+//             console.log(errThrown);
+//             alert("An error occured, please try again.");
+//           }
+//       });
+//     })
+//   }
+// }
+  addLikeListener();
+
 
   $("#signupUsername").on("change", function () {
     console.log("cajsdlkfjasdlkfj;asdlkfj");
@@ -270,6 +374,20 @@ $(document).ready(function () {
 
   //Handler that scan the checkboxes and send their states to POST
 
+  function likedGenerator(recipeId, liked) {
+    var retStr = '';
+    if(liked) {
+      var id="recipeLiked_" + recipeId;
+      retStr = `<i class="fas fa-heart text-danger"></i>
+      <button type="button" id=${id} class="d-block recipes_liked btn btn-success float-right"> YUM </button>`
+    } else {
+      var id="recipeLiked_" + recipeId;
+      retStr = `<i class="fas fa-heart"></i>
+      <button type="button" id=${id} class="recipes_liked btn btn-outline-dark float-right">  YUM</button>`
+    }
+    return retStr;
+  }
+
   function tagGenerator(tags) {
     var retStr = '';
     tags.forEach(function (tag) {
@@ -299,7 +417,16 @@ $(document).ready(function () {
     var searchTerms = $("#search_input").val();
     pack.push({ name: "search", value: searchTerms });
 
-
+  function checkLiked(recipeId, recipeList) {
+     var retVal = false;
+     for(var i = 0; i < recipeList.length; i ++) {
+        if(recipeList[i] == recipeId) {
+          retVal = true;
+          return retVal;
+        }
+    }
+    return retVal;
+  }
 
 
     $(".filter").each(function (box) {
@@ -320,19 +447,20 @@ $(document).ready(function () {
 
       //Check if anything was return at all, if not print message
 
-      if (data.length == 0) {
+      if (data.recipes.length == 0) {
           //console.log(data.length);
           $("#recipe_result").html("Oops, seems like there is no recipe that fits your description, try different tags or key words!!")
       }
 
-      data.forEach(function (d) {
+      data.recipes.forEach(function (d) {
 
         var tags = tagGenerator(d.tags);
         var ings = ingGenerator(d.ingredients);
         var inss = insGenerator(d.instructions);
+        var liked = likedGenerator(d._id, checkLiked(d._id, data.recipes_liked));
         $("#recipe_result").append('<div class="card my-4 recipe_preview border border-warning">' +
           '<div class="card-body p-2">' +
-          '<div class="">' + 
+          '<div class="">' +
           '  <h5 class="card-title text-primary font-weight-bold"><span class="text-uppercase">'+d.title+'</span> <span class="float-right text-dark"> By: <span class="text-info font-italic ">' + d.author_name + '</span> </span></h5>' +
           '  </div>' +
           '    <div class="row">' +
@@ -348,9 +476,10 @@ $(document).ready(function () {
           '        </div>' +
           '      </div>' +
           '    </div>' +
-
-
           '  </div>' +
+          '<div class="card-footer">' +
+          liked +
+          '</div>' +
           '</div>' +
 
             '<div class="modal fade" id="recipe_' + d._id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
@@ -410,9 +539,17 @@ $(document).ready(function () {
               '</div>'
 
       );
+
       });
+      addLikeListener();
 
     })
   }
+
+  //Click the recipe card to open modal
+  $("#recipe_result").on("click","div.card-body.p-2" , function() {
+       //console.log($(this).parent().next());
+      $(this).parent().next().modal()
+  })
 
 });
