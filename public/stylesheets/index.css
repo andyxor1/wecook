@@ -99,6 +99,12 @@ html {
   height: 100%;
 } */
 
+.recipe_preview:hover {
+  cursor: pointer;
+}
+button.recipes_liked {
+  position: relative;
+}
 
 .recipe_preview img {
   width: 100%;

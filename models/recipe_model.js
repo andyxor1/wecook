@@ -12,6 +12,7 @@ var RecipeSchema = new Schema({
   author: { type: String },
   author_name: { type: String },
   tags: { type: [String]},
+  liked: {type: [Schema.Types.ObjectId], ref: "User"}
 });
 
 
