@@ -211,18 +211,18 @@ router.get('/recipe/:id', function (req, res, next) {
 });
 
 // for adding a new recipe
-router.post('/recipes', isLoggedIn, function(req, res) {
+router.post('/recipes', isLoggedIn, upload.single('recipeImageUpload'), function(req, res) {
 
     var recipe = req.body.recipe;
     // recipe["picture"] = "/pictures/tofu-stew.jpg";
     var author = req.user;
-    // console.log("Hello---------------------------------------------------------------------------------------------");
-    // console.log(req.body)
-    // console.log(recipe);
-    // console.log(req.user);
+    console.log("Hello---------------------------------------------------------------------------------------------");
+    console.log(req.body)
+    console.log(recipe);
+    console.log(req.user);
+    console.log("Bye---------------------------------------------------------------------------------------------");
     recipe["author"] = author._id ;
     recipe["author_name"] = author.username ;
-    // console.log("Bye---------------------------------------------------------------------------------------------");
 
     // Add recipe to DB
     Recipe.create(recipe, function(err, recipe) {
