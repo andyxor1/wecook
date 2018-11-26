@@ -31,6 +31,19 @@ router.use(function (req, res, next) {
   console.log(req.user);
   res.locals.currentUser = req.user;
   res.locals.isIndexPage = false;
+  res.locals.checkLiked = function(recipeId) {
+    var retVal = false;
+    var userLikedRecipes = req.user.recipes_liked;
+    console.log("uesr recipes liked in locals");
+    console.log(userLikedRecipes);
+    for(var i = 0; i < userLikedRecipes.length; i ++ ) {
+      if(userLikedRecipes[i] == recipeId) {
+        retVal = true;
+        return retVal;
+      }
+    }
+    return retVal;
+  }
   next();
 });
 
@@ -215,6 +228,14 @@ router.post('/recipes', isLoggedIn, upload.single('recipeImageUpload'), function
 
     var recipe = req.body.recipe;
     // recipe["picture"] = "/pictures/tofu-stew.jpg";
+
+    recipe.ingredients = recipe.ingredients.filter(function(ingredient) {
+      return ingredient != "";
+    });
+
+    recipe.instructions = recipe.instructions.filter(function(instruction) {
+      return instruction != "";
+    });
     var author = req.user;
     console.log("Hello---------------------------------------------------------------------------------------------");
     console.log(req.body)
@@ -272,6 +293,108 @@ router.put("/recipe/:id", isLoggedIn, function( req, res) {
   });
 });
 
+// for updating recipe likes
+router.put('/users/recipes/:id', isLoggedIn, async function(req, res) {
+    console.log("being called in the recipe LIKE route")
+    var likedUser = req.user; // the user that liked the recipe
+    var recipeId = req.params.id;
+    console.log("This is data")
+    var data = req.body.recipeIsLiked;
+    console.log(typeof(data))
+    // console.log(data)
+    // console.log('current user is : ');
+    // console.log(likedUser.username)
+    // console.log(likedUser._id)
+    User.findById(likedUser._id, function(err, user) {
+      if(err) {
+        console.log(err);
+        return res.status(500).json({
+          title: 'An error occured',
+          error: err
+        });
+      }
+      // update the user
+      var recipes_liked = user.recipes_liked;
+      console.log("recipes liked")
+      console.log(recipes_liked);
+      var recipe_liked_size = recipes_liked.length;
+      if(data && data.length > 0 && data === "true") { // if recipe was liked
+        var isThere = false;
+        for (var i = 0; i < recipes_liked.length; i++) {
+          if(recipes_liked[i] === recipeId) {
+            isThere = true;
+          }
+        }
+        if(recipeId && recipeId != "undefined" && isThere == false ) {
+          recipes_liked.push(recipeId);
+        }
+        console.log("new recipe_liked:")
+        console.log(recipes_liked);
+      } else {
+        var filteredRecipe = recipes_liked.filter(function(value, index, arr){
+            return value != recipeId;
+        });
+        console.log(filteredRecipe);
+        recipes_liked = filteredRecipe;
+        console.log("fliteredRecipe")
+        console.log(recipes_liked);
+      }
+
+      user.recipes_liked = recipes_liked;
+      user.save(function(err, updatedUser) {
+        if(err) {
+          console.log(err);
+          return res.status(500).json({
+            title: 'A user save error occurred',
+            error: err
+          });
+        }
+        else if (updatedUser && updatedUser.recipes_liked.length > recipe_liked_size ) { // size grew by 1
+          return res.status(200).json({
+            msg: 'liked'
+          });
+        }
+        else { // size grew by 1
+          console.log("\n\n\n Updated User: \n\n\n")
+          console.log(updatedUser)
+          return res.status(200).json({
+            msg: 'unliked'
+          });
+        }
+
+      });
+
+
+      // if (user.length == 0) {
+      //   return res.status(200).json({
+      //     msg: 'available'
+      //   });
+      // }
+      // else {
+      //   return res.status(200).json({
+      //     msg: 'used'
+      //   });
+      // }
+    });
+    // Recipe.create(recipe, function(err, recipe) {
+    //     if(err) {
+    //         console.log(err);
+    //     } else {
+    //         console.log('RECIPES: ----------> added a recipe: ' + recipe.title);
+    //         User.findByIdAndUpdate(author._id,
+    //           { $push: { recipes_owned: recipe._id }},
+    //           function(err, user) {
+    //           if(err) {console.log(err);}
+    //           var recipes_owned = user.recipes_owned;
+    //           console.log(recipes_owned)
+    //         });
+    //
+    //       }
+    // });
+    // // re-render
+    // res.redirect('/dashboard');
+})
+
 
 // POST call for recipe query
 router.post('/dashboard', async function (req, res) {
@@ -315,11 +438,22 @@ router.post('/dashboard', async function (req, res) {
 
   console.log(queryObj);
 
-  Recipe.find(queryObj, function (err, recipes) {
-    if (err) { console.log(err); }
-    // res.json(req.body["Earl's"]);
-    res.json(recipes);
-  })
+    Recipe.find(queryObj, function(err, recipes) {
+      if(err) {console.log(err); }
+      // res.json(req.body["Earl's"]);
+      User.findById(req.user._id, function(err,user) {
+        if(err) {console.log(err)}
+        var recipes_liked = user.recipes_liked;
+        console.log("recipes liked in dashboard")
+        console.log(recipes_liked);
+        console.log(recipes)
+        return res.status(200).json({
+          recipes: recipes,
+          recipes_liked: recipes_liked
+        });
+      })
+
+    })
 
 
   // let result = await User.findById(userId);

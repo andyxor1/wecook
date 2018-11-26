@@ -68,7 +68,6 @@ app.use(function(req, res, next) {
 
 
 
-
 app.set('views', path.join(__dirname, 'views')); // specify that we want to use "views" folder for our "HTML" templates
 app.set('view engine', 'ejs'); // specify our "view engine" will be ejs, aka let's use ejs
 
