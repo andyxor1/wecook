@@ -434,7 +434,7 @@ $(document).ready(function () {
 
 function previewImageUpload() {
   var recipeImg = document.getElementById('recipeImageUpload');
-  var previewImg = document.querySelector('#recipeImageUpload + img')
+  var previewImg = document.getElementById('previewImg')
   previewImg.src = window.URL.createObjectURL(recipeImg.files[0]);
   previewImg.onload = function() {
     window.URL.revokeObjectURL(this.src);
@@ -444,7 +444,7 @@ function previewImageUpload() {
 const uploadImage = () => {
   var recipeImg = document.getElementById('recipeImageUpload');
   if (!recipeImg.files[0]) {
-    document.getElementById('recipeImage').value = document.getElementById('recipeImageURL').value || '';
+    // document.getElementById('recipeImage').value = document.getElementById('recipeImageURL').value || '';
     return ;
   }
 
