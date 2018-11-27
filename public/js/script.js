@@ -355,6 +355,9 @@ $(document).ready(function () {
     });
 
 
+  //Trigger query handler when Liked checkbox are clicked
+  $("#likebox").on("click", queryHandle);
+
   //Trigger query handler when checkbox are clicked
   $(".filter").on("click", queryHandle);
 
@@ -379,11 +382,11 @@ $(document).ready(function () {
     if(liked) {
       var id="recipeLiked_" + recipeId;
       retStr = `<i class="fas fa-heart text-danger"></i>
-      <button type="button" id=${id} class="d-block recipes_liked btn btn-success float-right"> YUM </button>`
+      <button type="button" id=${id} class="d-block recipes_liked btn btn-success float-right"> Like </button>`
     } else {
       var id="recipeLiked_" + recipeId;
       retStr = `<i class="fas fa-heart"></i>
-      <button type="button" id=${id} class="recipes_liked btn btn-outline-dark float-right">  YUM</button>`
+      <button type="button" id=${id} class="recipes_liked btn btn-outline-dark float-right">  Like </button>`
     }
     return retStr;
   }
@@ -449,11 +452,14 @@ $(document).ready(function () {
 
       if (data.recipes.length == 0) {
           //console.log(data.length);
-          $("#recipe_result").html("Oops, seems like there is no recipe that fits your description, try different tags or key words!!")
+          $("#recipe_result").html("Oops, seems like there is no recipe that fits your description, try different tags or key words!")
       }
 
       data.recipes.forEach(function (d) {
-
+        if ($("#likebox").prop("checked") && !checkLiked(d._id, data.recipes_liked)){
+          console.log("hiding dislikes")
+          return;
+        }
         var tags = tagGenerator(d.tags);
         var ings = ingGenerator(d.ingredients);
         var inss = insGenerator(d.instructions);
