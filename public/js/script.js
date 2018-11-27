@@ -69,11 +69,12 @@ function addLikeListener() {
               console.log($(this))
               tempBtn.removeClass("btn-outline-dark").addClass("btn-success");
               tempBtn.siblings().removeClass("text-dark").addClass("text-danger");
-              tempBtn.siblings("span").removeClass("text-danger").addClass("text-dark");
+              tempBtn.siblings("span").removeClass("text-danger").addClass("text-dark").html(returns.likes);
             } else {
               console.log("in else")
               tempBtn.removeClass("btn-success").addClass("btn-outline-dark");
               tempBtn.siblings().removeClass("text-danger").addClass("text-dark");
+              tempBtn.siblings("span").html(returns.likes);
             }
           },
           error: function (xhr, ajaxOptions, errThrown) {
@@ -426,11 +427,11 @@ $(document).ready(function () {
 
   //Handler that scan the checkboxes and send their states to POST
 
-  function likedGenerator(recipeId, liked, currentUser) {
+  function likedGenerator(recipeId, liked, currentUser, likes) {
     var retStr = '';
     if(liked) {
       var id="recipeLiked_" + recipeId;
-      retStr = `<i class="fas fa-heart text-danger"></i><span></span>`;
+      retStr = `<i class="fas fa-heart text-danger mr-3"></i><span>${likes}</span>`;
 
       if(currentUser) {
         retStr += `<button type="button" id=${id} class="d-block recipes_liked btn btn-success float-right"> Like </button>`;
@@ -438,7 +439,7 @@ $(document).ready(function () {
 
     } else {
       var id="recipeLiked_" + recipeId;
-      retStr = `<i class="fas fa-heart"></i><span></span>`;
+      retStr = `<i class="fas fa-heart mr-3"></i><span>${likes}</span>`;
 
       if(currentUser) {
         retStr += `<button type="button" id=${id} class="recipes_liked btn btn-outline-dark float-right">  Like </button>`;
@@ -518,7 +519,7 @@ $(document).ready(function () {
         var tags = tagGenerator(d.tags);
         var ings = ingGenerator(d.ingredients);
         var inss = insGenerator(d.instructions);
-        var liked = likedGenerator(d._id, checkLiked(d._id, data.recipes_liked), data.currentUser);
+        var liked = likedGenerator(d._id, checkLiked(d._id, data.recipes_liked), data.currentUser, d.likes);
         $("#recipe_result").append('<div class="card my-4 recipe_preview border border-warning">' +
           '<div class="card-body p-2">' +
           '<div class="">' +
@@ -680,7 +681,7 @@ function queryHandleB() {
       var tags = tagGenerator(d.tags);
       var ings = ingGenerator(d.ingredients);
       var inss = insGenerator(d.instructions);
-      var liked = likedGenerator(d._id, checkLiked(d._id, data.recipes_liked), data.currentUser);
+      var liked = likedGenerator(d._id, checkLiked(d._id, data.recipes_liked), data.currentUser, d.likes);
       $("#recipe_result").append('<div class="card my-4 recipe_preview border border-warning">' +
         '<div class="card-body recipe_preview_test p-2" id="'+ d._id +'">' +
         '<div class="">' +

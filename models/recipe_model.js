@@ -12,7 +12,9 @@ var RecipeSchema = new Schema({
   author: { type: String },
   author_name: { type: String },
   tags: { type: [String]},
-  liked: {type: [Schema.Types.ObjectId], ref: "User"}
+  liked: {type: [Schema.Types.ObjectId], ref: "User"},
+  likes: { type: Number, default:0 }
+
 });
 
 

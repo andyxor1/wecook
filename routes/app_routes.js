@@ -185,11 +185,12 @@ router.get('/account/:id', isLoggedIn, function (req, res, next) {
 // ------------------
 router.get('/dashboard', isLoggedIn, function (req, res, next) {
 
-  Recipe.find(function (err, recipes) {
+  Recipe.find().sort({"likes": -1}).exec(function (err, recipes) {
     if (err) { console.log(err); }
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
     console.log(req.user);
     console.log(req.body);
+    console.log(recipes)
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
     res.render('pages/dashboard', {
       recipe_seeds: recipes,
@@ -201,7 +202,7 @@ router.get('/dashboard', isLoggedIn, function (req, res, next) {
 //TODO: DELETE AFTER TESTING
 router.get('/dashboard/b', isLoggedIn, function (req, res, next) {
 
-  Recipe.find(function (err, recipes) {
+  Recipe.find().sort({"likes": -1}).exec(function (err, recipes) {
     if (err) { console.log(err); }
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
     console.log(req.user);
@@ -217,7 +218,7 @@ router.get('/dashboard/b', isLoggedIn, function (req, res, next) {
 
 router.get('/dashboard/community', function (req, res, next) {
 
-  Recipe.find(function (err, recipes) {
+  Recipe.find().sort({"likes": -1}).exec(function (err, recipes) {
     if (err) { console.log(err); }
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
     console.log(req.user);
@@ -233,7 +234,7 @@ router.get('/dashboard/community', function (req, res, next) {
 //TODO: DELETE AFTER TESTING
 router.get('/dashboard/community/b', function (req, res, next) {
 
-  Recipe.find(function (err, recipes) {
+  Recipe.find().sort({"likes": -1}).exec(function (err, recipes) {
     if (err) { console.log(err); }
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
     console.log(req.user);
@@ -404,16 +405,43 @@ router.put('/users/recipes/:id', isLoggedIn, async function(req, res) {
           });
         }
         else if (updatedUser && updatedUser.recipes_liked.length > recipe_liked_size ) { // size grew by 1
-          return res.status(200).json({
-            msg: 'liked'
+          Recipe.findById(recipeId, function(err, recipe) {
+            if(err) { console.log(err);}
+
+            // if no error, update likes in recipe
+            recipe.likes += 1;
+            console.log("called in recipe likes update")
+            console.log(recipe.likes)
+            console.log(typeof(recipe.likes))
+            recipe.save(function(err, updatedRecipe) {
+              if(err) {console.log(err)}
+              return res.status(200).json({
+                msg: 'liked',
+                likes: updatedRecipe.likes
+              });
+            });
           });
         }
-        else { // size grew by 1
-          console.log("\n\n\n Updated User: \n\n\n")
-          console.log(updatedUser)
-          return res.status(200).json({
-            msg: 'unliked'
-          });
+        else { // size shrunk by 1
+          Recipe.findById(recipeId, function(err, recipe) {
+            if(err) { console.log(err);}
+
+            // if no error, update likes in recipe
+            if(recipe.likes > 0) {
+              recipe.likes -= 1;
+            }
+            console.log("called in recipe likes update")
+            console.log(recipe.likes)
+            console.log(typeof(recipe.likes))
+            recipe.save(function(err, updatedRecipe) {
+              if(err) {console.log(err)}
+              return res.status(200).json({
+                msg: 'unliked',
+                likes: updatedRecipe.likes
+              });
+            });
+          })
+
         }
 
       });
