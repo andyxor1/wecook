@@ -30,15 +30,20 @@ router.use(function(req, res, next) {
   res.locals.isIndexPage = false;
   res.locals.checkLiked = function(recipeId) {
     var retVal = false;
-    var userLikedRecipes = req.user.recipes_liked;
-    console.log("uesr recipes liked in locals");
-    console.log(userLikedRecipes);
-    for(var i = 0; i < userLikedRecipes.length; i ++ ) {
-      if(userLikedRecipes[i] == recipeId) {
-        retVal = true;
-        return retVal;
+
+      //Only check liked when user loged-in
+      if( req.isAuthenticated() ) {
+
+          var userLikedRecipes = req.user.recipes_liked;
+          console.log("uesr recipes liked in locals");
+          console.log(userLikedRecipes);
+          for (var i = 0; i < userLikedRecipes.length; i++) {
+              if (userLikedRecipes[i] == recipeId) {
+                  retVal = true;
+                  return retVal;
+              }
+          }
       }
-    }
     return retVal;
   }
   next();
@@ -437,6 +442,13 @@ router.post('/dashboard', async function(req, res) {
     Recipe.find(queryObj, function(err, recipes) {
       if(err) {console.log(err); }
       // res.json(req.body["Earl's"]);
+
+      if( !req.isAuthenticated() ) {
+          return res.status(200).json({
+              recipes: recipes,
+              recipes_liked: []
+          });
+      }
       User.findById(req.user._id, function(err,user) {
         if(err) {console.log(err)}
         var recipes_liked = user.recipes_liked;
