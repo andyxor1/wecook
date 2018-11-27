@@ -520,7 +520,7 @@ router.post('/dashboard', async function (req, res) {
 
   console.log(queryObj);
 
-    Recipe.find(queryObj, function(err, recipes) {
+    Recipe.find(queryObj).sort({"likes": -1}).exec(function(err, recipes) {
       if(err) {console.log(err); }
       // res.json(req.body["Earl's"]);
 
