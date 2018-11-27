@@ -340,7 +340,7 @@ router.get("/recipes/:id", function( req, res) {
       res.redirect("back");
     } else {
       res.render('pages/recipe_details', {
-        recipe_seeds: recipes,
+        recipe: recipe,
       });
     }
 

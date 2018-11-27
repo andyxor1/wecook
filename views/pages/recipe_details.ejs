@@ -4,61 +4,56 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-12">
-      <div class="card questionbox-card text-dark">
+      <div class="card recipe_preview questionbox-card text-dark">
         <div class="card-body">
           <h1 class="card-title text-warning"> <%= recipe.title %> </h1>
-          <h6 class="card-subtitle mb-2 text-muted mb-4 font-italic"> Recipe By: <%= recipe.author %></h6>
+          <h6 class="card-subtitle mb-2 font-25 text-muted mb-4 "> Recipe By: <span class="text-info"> <%= recipe.author_name %> </span></h6>
           <hr>
-
           <div class="row">
-            <div class="col-md-4">
-              <img class="img-fluid" src="<%= recipe.picture %>" alt="<%= recipe.title %>">
-            </div>
-          </div>
-
-          <hr class="my-3">
-
-          <div class="row">
-            <div class="col-md-4">
-              <h1><i class="icon mr-2 font-25 fas fa-info-circle"></i> Ingredients</h1>
-              <hr>
-              <ul>
-                <% recipe.ingredients.forEach(function(ingredient) { %>
-                    <li><%= ingredient %></li>
-                <% }); %>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <h1><i class="icon mr-2 font-25 fas fa-info-circle"></i> Description</h1>
-              <hr>
-              <p>
-                  <%= recipe.description %>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <h1><i class="icon mr-2 font-25 fas fa-info-circle"></i> Instructions</h1>
-              <hr>
-              <div id="prepTime">
-                  <ul>
-                      <li>
-                          <i class="icon far font-30 fa-clock"></i> Prep Time:  <time><%= recipe.prep_time %> minutes</time>
-                      </li>
-                      <li>
-                          <i class="icon fas font-30 fa-clock"></i> Cook Time: <time><%= recipe.prep_time %> minutes</time>
-                      </li>
-
-                  </ul>
+            <div class="col-sm-4">
+              <img class="card-img-top img-fluid" src="<%= recipe.picture %>" alt="<%= recipe.title %>">
+              <div class="mt-3">
+                <p class="font-italic font-weight-bold"> <i class="icon mr-2 py-1 font-25 fas fa-tags"></i> Tags </p>
+                <div class="d-flex flex-wrap">
+                  <% recipe.tags.forEach(function(tag) { %>
+                      <a class="mr-2 mb-2 px-2 tag text-dark disabled"><%= tag %></a>
+                  <% }); %>
+                </div>
               </div>
-               <ol>
-                 <% recipe.instructions.forEach(function(instruction) { %>
-                     <li><%= instruction %></li>
-                 <% }); %>
-              </ol>
             </div>
+            <div class="col-md-8 card-text">
+              <p><span class="font-italic font-weight-bold"><i class="icon mr-2 font-25 far fa-clock"></i> Prep Time:</span> <%= recipe.prep_time %> minutes</p>
+              <p><span class="font-italic font-weight-bold"><i class="icon mr-2 font-25 fas fa-clock"></i> Cook Time:</span> <%= recipe.cook_time %> minutes</p>
 
+              <p class="font-italic font-weight-bold"><i class="icon mr-2 font-25 fas fa-info-circle"></i> Description</p>
+              <p class="flex-wrap"><%=recipe.description %></p>
+
+              <div class="row">
+                <div class="col-sm-6 border-right">
+                  <p class="font-italic font-weight-bold text-center"><i class="icon mr-2 font-25 fas fa-shopping-basket"></i> Ingredients</p>
+                  <hr>
+                  <ul>
+                    <% recipe.ingredients.forEach(function(ingredient) { %>
+                        <li><%= ingredient %></li>
+                    <% }); %>
+                  </ul>
+
+                </div>
+                <div class="col-sm-6">
+                  <p class="font-italic font-weight-bold text-center"><i class="icon mr-2 font-25 fas fa-shoe-prints"></i> Instructions</p>
+                  <hr>
+                  <ol>
+                    <% recipe.instructions.forEach(function(instruction) { %>
+                        <li><%= instruction %></li>
+                    <% }); %>
+                  </ol>
+                </div>
+              </div>
           </div>
-
         </div>
+      </div>
+      <div class="card-footer">
+        <a href="javascript:history.go(-1)" class="btn btn-primary btn-block">Go Back</a>
       </div>
     </div>
   </div>

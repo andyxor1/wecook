@@ -88,7 +88,18 @@ function addLikeListener() {
 }
 }
 
+function cardListenClick() {
+  var recipes = $(".recipe_preview_test");
+  for(var i = 0; i < recipes.length; i ++) {
+    recipes[i].addEventListener("click", function(e) {
+      console.log("clicked");
+      var id = $(this)[0].id;
+      var url = window.location.origin;
+      window.location = `/recipes/${id}/`;
 
+    });
+  }
+}
 $(document).ready(function () {
   let userexistsOpened = false;
   let recipeIsLiked = false;
@@ -135,15 +146,7 @@ $(document).ready(function () {
   }
 
   if(currentLocation && currentLocation === "b") { // if we are testing
-    var recipes = $(".recipe_preview_test");
-    for(var i = 0; i < recipes.length; i ++) {
-      recipes[i].addEventListener("click", function(e) {
-        console.log("clicked");
-        var id = $(this)[0].id
-        url = `/recipes/${id}/`
-        $.get(url);
-      });
-    }
+    cardListenClick();
   }
 
   // $("#deleteRecipeConfirm").on("keyup", function(e) {
@@ -335,7 +338,21 @@ $(document).ready(function () {
   });
 
 
-  $('#search_button').on("click", queryHandle);
+  if(currentLocation && currentLocation === "b") {
+    $('#search_button').on("click", queryHandleB);
+    //Trigger query handler when Liked checkbox are clicked
+    $("#likebox").on("click", queryHandleB);
+
+    //Trigger query handler when checkbox are clicked
+    $(".filter").on("click", queryHandleB);
+  } else {
+    $('#search_button').on("click", queryHandle);
+    //Trigger query handler when Liked checkbox are clicked
+    $("#likebox").on("click", queryHandle);
+
+    //Trigger query handler when checkbox are clicked
+    $(".filter").on("click", queryHandle);
+  }
   // var searchTerms = $("#search_input").val();
   // console.log(searchTerms);
   // // console.log("Something's being searched");
@@ -389,13 +406,6 @@ $(document).ready(function () {
       $(this).css('text-decoration', 'none');
     });
 
-
-  //Trigger query handler when Liked checkbox are clicked
-  $("#likebox").on("click", queryHandle);
-
-  //Trigger query handler when checkbox are clicked
-  $(".filter").on("click", queryHandle);
-
   //Trigger query handler when hitting enter in search
   $('#search_input').on('keypress', function (e) {
       if(e.which === 13){
@@ -403,7 +413,11 @@ $(document).ready(function () {
           //Disable textbox to prevent multiple submit
           $(this).attr("disabled", "disabled");
 
-          queryHandle();
+          if(currentLocation && currentLocation === "b") {
+            queryHandleB();
+          } else {
+            queryHandle();
+          }
 
           //Enable the textbox again if needed.
           $(this).removeAttr("disabled");
@@ -456,12 +470,6 @@ $(document).ready(function () {
       });
       return retStr;
   }
-
-  function queryHandle() {
-    var pack = [];
-    var searchTerms = $("#search_input").val();
-    pack.push({ name: "search", value: searchTerms });
-
   function checkLiked(recipeId, recipeList) {
      var retVal = false;
      for(var i = 0; i < recipeList.length; i ++) {
@@ -472,6 +480,11 @@ $(document).ready(function () {
     }
     return retVal;
   }
+
+  function queryHandle() {
+    var pack = [];
+    var searchTerms = $("#search_input").val();
+    pack.push({ name: "search", value: searchTerms });
 
 
     $(".filter").each(function (box) {
@@ -593,6 +606,169 @@ $(document).ready(function () {
 
     })
   }
+
+
+
+
+/* -----------------------------DANGER ZONE ------------------------------ */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+// VERSION B of queryHandle
+function queryHandleB() {
+  var pack = [];
+  var searchTerms = $("#search_input").val();
+  pack.push({ name: "search", value: searchTerms });
+
+
+  $(".filter").each(function (box) {
+    var name = $(this).prop("name");
+    var value = $(this).prop("checked");
+    pack.push({ name: name, value: value })
+  })
+
+
+
+  //Print the package to console
+  console.log(pack);
+
+  //POST call and print the response
+  $.post("/dashboard", pack, function (data, status) {
+    console.log(data);
+    $("#recipe_result").empty();
+
+    //Check if anything was return at all, if not print message
+
+    if (data.recipes.length == 0) {
+        //console.log(data.length);
+        $("#recipe_result").html("Oops, seems like there is no recipe that fits your description, try different tags or key words!")
+    }
+
+    data.recipes.forEach(function (d) {
+      if ($("#likebox").prop("checked") && !checkLiked(d._id, data.recipes_liked)){
+        console.log("hiding dislikes")
+        return;
+      }
+      var tags = tagGenerator(d.tags);
+      var ings = ingGenerator(d.ingredients);
+      var inss = insGenerator(d.instructions);
+      var liked = likedGenerator(d._id, checkLiked(d._id, data.recipes_liked), data.currentUser);
+      $("#recipe_result").append('<div class="card my-4 recipe_preview border border-warning">' +
+        '<div class="card-body recipe_preview_test p-2" id="'+ d._id +'">' +
+        '<div class="">' +
+        '  <h5 class="card-title text-primary font-weight-bold"><span class="text-uppercase">'+d.title+'</span> <span class="float-right text-dark"> By: <span class="text-info font-italic ">' + d.author_name + '</span> </span></h5>' +
+        '  </div>' +
+        '    <div class="row">' +
+        '      <div class="col-md-4">' +
+        '        <img class="view_img mb-1 img-fluid align-middle" src="' + d.picture + '" alt="'+ d.title +'" >' +
+        '      </div>' +
+        '      <div class="col-md-8 p-2">' +
+        '        <p class="card-text"><i class="icon mr-2 font-25 fas fa-clock"></i>' + d.cook_time + ' minutes</p>' +
+        '        <p class="card-text"><i class="icon mr-2 font-25 fas fa-info-circle"></i>' + d.description + '</p>' +
+        '        <div class="d-flex flex-wrap">' +
+        '          <i class="icon mr-2 py-1 font-25 fas fa-tags"></i>' +
+        '            ' + tags +
+        '        </div>' +
+        '      </div>' +
+        '    </div>' +
+        '  </div>' +
+        '<div class="card-footer">' +
+        liked +
+        '</div>' +
+        '</div>'
+    );
+
+    });
+    addLikeListener();
+    cardListenClick();
+
+  })
+}
+
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+/* ----------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //Click the recipe card to open modal
   if(currentLocation && currentLocation != "b") {
