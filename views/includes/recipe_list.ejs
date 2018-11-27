@@ -34,14 +34,14 @@
 
   <div class="card-footer">
       <% if(checkLiked(recipe.id) ) { %>
-          <i class="align-baseline icon fas fa-heart text-danger mr-3"></i>
-          <span><%= recipe.likes %></span>
+          <i class="align-baseline heart-icon icon fas fa-heart text-danger mr-3"></i>
+          <span class="heart-icon"><%= recipe.likes %></span>
           <% if (currentUser) { %>
           <button type="button" id="recipeLiked_<%= recipe.id %>" class="d-block recipes_liked btn btn-success float-right"> Like </button>
           <% } %>
 
       <% } else { %>
-          <i class="fas fa-heart mr-3"></i><span><%= recipe.likes %></span>
+          <i class="icon fas fa-heart mr-3 heart-icon"></i><span class="heart-icon"><%= recipe.likes %></span>
           <% if (currentUser) { %>
 
           <button type="button" id="recipeLiked_<%= recipe.id %>" class="recipes_liked btn btn-outline-dark float-right">  Like </button>

@@ -89,6 +89,16 @@ html {
 
 /* ////////// END OF INDEX CSS ////////// */
 
+.heart-icon {
+  padding: inherit;
+}
+i.heart-icon {
+  padding-left: 0;
+  padding-right: 0;
+}
+span.heart-icon {
+  padding-left: 0;
+}
 
 #sidebar ul li > a {
   font-size: 18px;

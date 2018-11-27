@@ -431,7 +431,7 @@ $(document).ready(function () {
     var retStr = '';
     if(liked) {
       var id="recipeLiked_" + recipeId;
-      retStr = `<i class="fas fa-heart text-danger mr-3"></i><span>${likes}</span>`;
+      retStr = `<i class="fas fa-heart text-danger mr-3 icon heart-icon"></i><span class="heart-icon">${likes}</span>`;
 
       if(currentUser) {
         retStr += `<button type="button" id=${id} class="d-block recipes_liked btn btn-success float-right"> Like </button>`;
@@ -439,7 +439,7 @@ $(document).ready(function () {
 
     } else {
       var id="recipeLiked_" + recipeId;
-      retStr = `<i class="fas fa-heart mr-3"></i><span>${likes}</span>`;
+      retStr = `<i class="fas fa-heart mr-3 icon heart-icon"></i><span class="heart-icon">${likes}</span>`;
 
       if(currentUser) {
         retStr += `<button type="button" id=${id} class="recipes_liked btn btn-outline-dark float-right">  Like </button>`;
