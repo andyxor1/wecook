@@ -14,9 +14,12 @@
 
             <ul class="list-unstyled components">
 
-                <li>
-                    <input type="checkbox" id="likebox" name="Like" value="" class="notfilter" ><a class="filter-link">Recipes I Liked</a>
-                </li>
+              <% if(currentUser) { %>
+                  <li>
+                      <input type="checkbox" id="likebox" name="Like" value="" class="notfilter" ><a class="filter-link">Recipes I Liked</a>
+                  </li>
+                <% } %>
+
 
 
                 <li>

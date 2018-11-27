@@ -54,6 +54,7 @@ function addLikeListener() {
               console.log($(this))
               tempBtn.removeClass("btn-outline-dark").addClass("btn-success");
               tempBtn.siblings().removeClass("text-dark").addClass("text-danger");
+              tempBtn.siblings("span").removeClass("text-danger").addClass("text-dark");
             } else {
               console.log("in else")
               tempBtn.removeClass("btn-success").addClass("btn-outline-dark");
@@ -377,16 +378,23 @@ $(document).ready(function () {
 
   //Handler that scan the checkboxes and send their states to POST
 
-  function likedGenerator(recipeId, liked) {
+  function likedGenerator(recipeId, liked, currentUser) {
     var retStr = '';
     if(liked) {
       var id="recipeLiked_" + recipeId;
-      retStr = `<i class="fas fa-heart text-danger"></i>
-      <button type="button" id=${id} class="d-block recipes_liked btn btn-success float-right"> Like </button>`
+      retStr = `<i class="fas fa-heart text-danger"></i><span></span>`;
+
+      if(currentUser) {
+        retStr += `<button type="button" id=${id} class="d-block recipes_liked btn btn-success float-right"> Like </button>`;
+      }
+
     } else {
       var id="recipeLiked_" + recipeId;
-      retStr = `<i class="fas fa-heart"></i>
-      <button type="button" id=${id} class="recipes_liked btn btn-outline-dark float-right">  Like </button>`
+      retStr = `<i class="fas fa-heart"></i><span></span>`;
+
+      if(currentUser) {
+        retStr += `<button type="button" id=${id} class="recipes_liked btn btn-outline-dark float-right">  Like </button>`;
+      }
     }
     return retStr;
   }
@@ -463,7 +471,7 @@ $(document).ready(function () {
         var tags = tagGenerator(d.tags);
         var ings = ingGenerator(d.ingredients);
         var inss = insGenerator(d.instructions);
-        var liked = likedGenerator(d._id, checkLiked(d._id, data.recipes_liked));
+        var liked = likedGenerator(d._id, checkLiked(d._id, data.recipes_liked), data.currentUser);
         $("#recipe_result").append('<div class="card my-4 recipe_preview border border-warning">' +
           '<div class="card-body p-2">' +
           '<div class="">' +

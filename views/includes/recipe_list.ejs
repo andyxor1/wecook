@@ -31,15 +31,24 @@
       </div>
     </div><!-- row -->
   </div>
+
   <div class="card-footer">
-    <% if(checkLiked(recipe.id) ) { %>
-        <i class="fas fa-heart text-danger"></i>
-        <button type="button" id="recipeLiked_<%= recipe.id %>" class="d-block recipes_liked btn btn-success float-right"> Like </button>
-    <% } else { %>
-        <i class="fas fa-heart"></i>
-        <button type="button" id="recipeLiked_<%= recipe.id %>" class="recipes_liked btn btn-outline-dark float-right">  Like </button>
-    <% } %>
+      <% if(checkLiked(recipe.id) ) { %>
+          <i class="align-baseline icon fas fa-heart text-danger mr-3"></i><span></span>
+          <% if (currentUser) { %>
+          <button type="button" id="recipeLiked_<%= recipe.id %>" class="d-block recipes_liked btn btn-success float-right"> Like </button>
+          <% } %>
+
+      <% } else { %>
+          <i class="fas fa-heart"></i><span></span>
+          <% if (currentUser) { %>
+
+          <button type="button" id="recipeLiked_<%= recipe.id %>" class="recipes_liked btn btn-outline-dark float-right">  Like </button>
+          <% } %>
+
+      <% } %>
   </div>
+
 </div>
 
 <!-- <div class="card my-4 recipe_preview">

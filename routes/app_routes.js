@@ -446,6 +446,7 @@ router.post('/dashboard', async function(req, res) {
       if( !req.isAuthenticated() ) {
           return res.status(200).json({
               recipes: recipes,
+              currentUser: req.isAuthenticated(),
               recipes_liked: []
           });
       }
@@ -457,6 +458,7 @@ router.post('/dashboard', async function(req, res) {
         console.log(recipes)
         return res.status(200).json({
           recipes: recipes,
+          currentUser: req.isAuthenticated(),
           recipes_liked: recipes_liked
         });
       })
