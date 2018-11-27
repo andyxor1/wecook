@@ -362,7 +362,7 @@ $(document).ready(function () {
       //console.log($(this).prev())
       //Hover in
       $(this).css('color', 'orange');
-      $(this).css('text-decoration', 'underline');
+      $(this).css('cursor', 'pointer');
     },
     function () {
       //Hover out
