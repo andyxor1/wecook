@@ -1,0 +1,30 @@
+<% include ../includes/header %>
+<% include ../includes/nav %>
+
+<div class="container dashboard">
+
+  <div class="row">
+    <div class="col-md-3 mt-2">
+      <% include ../includes/sidebar %>
+    </div>
+    <div class="col-md-9 mt-2">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title font-40 "><i class="fas fa-receipt mb-3 text-dark mb-3 "></i> Recipe Board (Ver. B)</h5>
+          <hr>
+
+          <div class="d-block" id="recipe_result">
+            <% recipe_seeds.forEach(function(recipe) { %>
+              <% console.log(recipe.title); %>
+              <%- include('../includes/recipe_listB', {recipe: recipe}); %>
+            <% }); %>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
+
+
+
+<% include ../includes/footer %>

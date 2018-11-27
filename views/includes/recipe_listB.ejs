@@ -1,0 +1,40 @@
+<div class="card my-4 recipe_preview recipe_preview_test border border-warning" id="<%= recipe.id %>">
+  <div class="card-body p-2">
+    <div class="">
+      <h5 class="card-title text-primary font-weight-bold"><span class="text-uppercase"><%= recipe.title %> </span> <span class="float-right text-dark"> By: <span class="text-info font-italic "> <%= recipe.author_name %> </span> </span></h5>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+
+
+        <img class="view_img mb-1 img-fluid align-middle" src="<%= recipe.picture%>" alt="<%= recipe.title%>" >
+
+      </div>
+      <div class="col-md-8 p-2">
+        <p class="card-text"><i class="icon mr-2 font-25 fas fa-clock"></i> <%= recipe.cook_time %> minutes</p>
+        <p class="card-text"><i class="icon mr-2 font-25 fas fa-info-circle"></i><%=recipe.description %></p>
+        <div class="d-flex flex-wrap">
+          <i class="icon mr-2 py-1 font-25 fas fa-tags"></i>
+            <% recipe.tags.forEach(function(tag) { %>
+                <a class="mr-2 mb-2 px-2 tag text-dark"><%= tag %></a>
+            <% }); %>
+        </div>
+      </div>
+    </div><!-- row -->
+  </div>
+
+  <div class="card-footer">
+      <% if(checkLiked(recipe.id) ) { %>
+          <i class="align-baseline icon fas fa-heart text-danger mr-3"></i><span></span>
+          <% if (currentUser) { %>
+          <button type="button" id="recipeLiked_<%= recipe.id %>" class="d-block recipes_liked btn btn-success float-right"> Like </button>
+          <% } %>
+      <% } else { %>
+          <i class="fas fa-heart"></i><span></span>
+          <% if (currentUser) { %>
+
+          <button type="button" id="recipeLiked_<%= recipe.id %>" class="recipes_liked btn btn-outline-dark float-right">  Like </button>
+          <% } %>
+      <% } %>
+  </div>
+</div>

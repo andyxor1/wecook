@@ -1,3 +1,18 @@
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyClgN7c6WmJnhTkZCC_7cW3ir5hN4YllWQ",
+  authDomain: "wecoook-27e9d.firebaseapp.com",
+  databaseURL: "https://wecoook-27e9d.firebaseio.com",
+  projectId: "wecoook-27e9d",
+  storageBucket: "wecoook-27e9d.appspot.com",
+  messagingSenderId: "775435984176"
+};
+firebase.initializeApp(config);
+
+// Initialize Cloud Storage through Firebase
+var storageRef = firebase.storage().ref();
+
 function addInstructionField() {
   var instructionsList = document.getElementsByName('recipe[instructions]');
   var inputField = document.createElement('input');
@@ -54,6 +69,7 @@ function addLikeListener() {
               console.log($(this))
               tempBtn.removeClass("btn-outline-dark").addClass("btn-success");
               tempBtn.siblings().removeClass("text-dark").addClass("text-danger");
+              tempBtn.siblings("span").removeClass("text-danger").addClass("text-dark");
             } else {
               console.log("in else")
               tempBtn.removeClass("btn-success").addClass("btn-outline-dark");
@@ -107,6 +123,25 @@ $(document).ready(function () {
           console.log("clicked");
           $(hiddenStrBtn).submit();
         });
+      });
+    }
+  }
+
+  currentLocation = window.location.href.split("/")
+  if (currentLocation) {
+    currentLocation = currentLocation[currentLocation.length-1]
+    console.log("Current Location is: " )
+    console.log(currentLocation)
+  }
+
+  if(currentLocation && currentLocation === "b") { // if we are testing
+    var recipes = $(".recipe_preview_test");
+    for(var i = 0; i < recipes.length; i ++) {
+      recipes[i].addEventListener("click", function(e) {
+        console.log("clicked");
+        var id = $(this)[0].id
+        url = `/recipes/${id}/`
+        $.get(url);
       });
     }
   }
@@ -346,7 +381,7 @@ $(document).ready(function () {
       //console.log($(this).prev())
       //Hover in
       $(this).css('color', 'orange');
-      $(this).css('text-decoration', 'underline');
+      $(this).css('cursor', 'pointer');
     },
     function () {
       //Hover out
@@ -377,16 +412,23 @@ $(document).ready(function () {
 
   //Handler that scan the checkboxes and send their states to POST
 
-  function likedGenerator(recipeId, liked) {
+  function likedGenerator(recipeId, liked, currentUser) {
     var retStr = '';
     if(liked) {
       var id="recipeLiked_" + recipeId;
-      retStr = `<i class="fas fa-heart text-danger"></i>
-      <button type="button" id=${id} class="d-block recipes_liked btn btn-success float-right"> Like </button>`
+      retStr = `<i class="fas fa-heart text-danger"></i><span></span>`;
+
+      if(currentUser) {
+        retStr += `<button type="button" id=${id} class="d-block recipes_liked btn btn-success float-right"> Like </button>`;
+      }
+
     } else {
       var id="recipeLiked_" + recipeId;
-      retStr = `<i class="fas fa-heart"></i>
-      <button type="button" id=${id} class="recipes_liked btn btn-outline-dark float-right">  Like </button>`
+      retStr = `<i class="fas fa-heart"></i><span></span>`;
+
+      if(currentUser) {
+        retStr += `<button type="button" id=${id} class="recipes_liked btn btn-outline-dark float-right">  Like </button>`;
+      }
     }
     return retStr;
   }
@@ -463,7 +505,7 @@ $(document).ready(function () {
         var tags = tagGenerator(d.tags);
         var ings = ingGenerator(d.ingredients);
         var inss = insGenerator(d.instructions);
-        var liked = likedGenerator(d._id, checkLiked(d._id, data.recipes_liked));
+        var liked = likedGenerator(d._id, checkLiked(d._id, data.recipes_liked), data.currentUser);
         $("#recipe_result").append('<div class="card my-4 recipe_preview border border-warning">' +
           '<div class="card-body p-2">' +
           '<div class="">' +
@@ -553,9 +595,41 @@ $(document).ready(function () {
   }
 
   //Click the recipe card to open modal
-  $("#recipe_result").on("click","div.card-body.p-2" , function() {
-       //console.log($(this).parent().next());
-      $(this).parent().next().modal()
-  })
+  if(currentLocation && currentLocation != "b") {
+    $("#recipe_result").on("click","div.card-body.p-2" , function() {
+         //console.log($(this).parent().next());
+        $(this).parent().next().modal()
+    })
+  }
 
 });
+
+function previewImageUpload() {
+  var recipeImg = document.getElementById('recipeImageUpload');
+  var previewImg = document.getElementById('previewImg')
+  previewImg.src = window.URL.createObjectURL(recipeImg.files[0]);
+  previewImg.onload = function() {
+    window.URL.revokeObjectURL(this.src);
+  }
+}
+
+const uploadImage = () => {
+  var recipeImg = document.getElementById('recipeImageUpload');
+  if (!recipeImg.files[0]) {
+    // document.getElementById('recipeImage').value = document.getElementById('recipeImageURL').value || '';
+    return ;
+  }
+
+  // Upload recipe image to firebase storage
+  var file = recipeImg.files[0];
+  storageRef.child('images/' + Date.now() + file.name).put(file)
+      .then((snapshot) => {
+          // Upon completion of upload, store download URL
+          console.log('Uploaded a file!');
+          snapshot.ref.getDownloadURL().then((downloadURL) => {
+              console.log(`Image url is ${downloadURL}`);
+              document.getElementById('recipeImage').value = downloadURL;
+              document.getElementById('recipeForm').submit();
+          });
+      });
+}
