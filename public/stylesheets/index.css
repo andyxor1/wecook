@@ -83,6 +83,10 @@ html {
   border-radius: 5px;
 }
 
+.card-footer {
+  cursor: not-allowed;
+}
+
 /* ////////// END OF INDEX CSS ////////// */
 
 
