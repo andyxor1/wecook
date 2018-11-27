@@ -1,3 +1,18 @@
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyClgN7c6WmJnhTkZCC_7cW3ir5hN4YllWQ",
+  authDomain: "wecoook-27e9d.firebaseapp.com",
+  databaseURL: "https://wecoook-27e9d.firebaseio.com",
+  projectId: "wecoook-27e9d",
+  storageBucket: "wecoook-27e9d.appspot.com",
+  messagingSenderId: "775435984176"
+};
+firebase.initializeApp(config);
+
+// Initialize Cloud Storage through Firebase
+var storageRef = firebase.storage().ref();
+
 function addInstructionField() {
   var instructionsList = document.getElementsByName('recipe[instructions]');
   var inputField = document.createElement('input');
@@ -567,3 +582,33 @@ $(document).ready(function () {
   })
 
 });
+
+function previewImageUpload() {
+  var recipeImg = document.getElementById('recipeImageUpload');
+  var previewImg = document.getElementById('previewImg')
+  previewImg.src = window.URL.createObjectURL(recipeImg.files[0]);
+  previewImg.onload = function() {
+    window.URL.revokeObjectURL(this.src);
+  }
+}
+
+const uploadImage = () => {
+  var recipeImg = document.getElementById('recipeImageUpload');
+  if (!recipeImg.files[0]) {
+    // document.getElementById('recipeImage').value = document.getElementById('recipeImageURL').value || '';
+    return ;
+  }
+
+  // Upload recipe image to firebase storage
+  var file = recipeImg.files[0];
+  storageRef.child('images/' + Date.now() + file.name).put(file)
+      .then((snapshot) => {
+          // Upon completion of upload, store download URL
+          console.log('Uploaded a file!');
+          snapshot.ref.getDownloadURL().then((downloadURL) => {
+              console.log(`Image url is ${downloadURL}`);
+              document.getElementById('recipeImage').value = downloadURL;
+              document.getElementById('recipeForm').submit();
+          });
+      });
+}

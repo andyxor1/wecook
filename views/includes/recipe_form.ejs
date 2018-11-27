@@ -4,22 +4,38 @@
       <div class="card-body">
         <h1 class="card-title text-info"> Share your recipe ...</h1>
         <h6 class="card-subtitle mb-2 text-muted mb-4 font-italic"> your recipe could help a hungry student...</h6>
-        <form id="recipeForm" action="/recipes" method="POST">
-          <!-- <form id="recipeForm" action="https://httpbin.org/post" method="POST"> -->
+        <form id="recipeForm" action="/recipes" method="POST" enctype="multipart/form-data">
+          <!-- <form id="recipeForm" action="https://httpbin.org/post" method="POST" enctype="multipart/form-data"> -->
           <div class="form-group">
+
             <span> <i class="icon fas fa-feather-alt mr-3"></i> </span>
             <label for="recipeTitle">Title</label>
             <input type="text" class="mt-2 form-control " name="recipe[title]" id="recipeTitle" aria-describedby="emailHelp"
               placeholder="Enter a unique title for your recipe" required>
           </div>
           <div class="form-group">
-            <!-- <div class="row">
-              <div class="col-md-8"> -->
+            <div class="row">
+              <div class="col-md-4">
                 <span> <i class="icon far fa-image mr-3"></i> </span>
-                <label for="recipeTitle">Recipe Image</label>
-                <input type="text" class="mt-2 form-control " name="recipe[picture]" id="recipeImage" aria-describedby="emailHelp"
-                placeholder="Enter an image url" required>
+                <label for="recipeImage">Choose recipe image</label>
+                <div class="d-flex align-items-center h-100 justify-content-end">
+                    <input type="file" aria-describedby="emailHelp" id="recipeImageUpload"
+                    accept=".jpg, .jpeg, .png" onchange="previewImageUpload();">
+                </div>
+              </div>
+              <div class="col-md-8">
+                <img src="/icons/camera.svg" id="previewImg" height="200" alt="Image preview">
+              </div>
+            </div>
           </div>
+
+          <!-- <span> <i class="icon far fa-image mr-3"></i> </span>
+          <label for="recipeTitle">Recipe Image</label>
+          <input type="text" class="mt-2 form-control " id="recipeImageURL" aria-describedby="emailHelp" placeholder="Enter an image url"
+            required> -->
+
+          <input type="hidden" name="recipe[picture]" id="recipeImage">
+
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
@@ -45,6 +61,20 @@
           </div>
 
           <div class="form-group">
+            <label for="ingredientsList"><i class="icon fas fa-mortar-pestle mr-3"></i> Ingredients</label>
+            <div class="mt-2" id="ingredientsList">
+              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 1"
+                required>
+              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 2">
+              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 3">
+              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 4">
+              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 5">
+            </div>
+            <a class="btn btn-primary mt-2" onclick="addIngredientField()">Add another ingredient</a>
+          </div>
+
+
+          <div class="form-group">
             <label for="instructionsList"><i class="icon fas fa-chalkboard-teacher mr-3"></i> Instructions</label>
             <div class="mt-2" id="instructionsList">
               <!-- to be removed later-->
@@ -56,21 +86,6 @@
               <input type="text" class="mb-2 form-control " name="recipe[instructions]" placeholder="Instruction 5">
             </div>
             <a class="btn btn-primary mt-2" onclick="addInstructionField()">Add another instruction</a>
-          </div>
-
-          <div class="form-group">
-
-            <label for="ingredientsList"><i class="icon fas fa-mortar-pestle mr-3"></i> Ingredients</label>
-            <div class="mt-2" id="ingredientsList">
-              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 1"
-                required>
-              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 2">
-              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 3">
-              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 4">
-              <input type="text" class="mb-2 form-control " name="recipe[ingredients]" placeholder="Ingredient 5">
-            </div>
-            <a class="btn btn-primary mt-2" onclick="addIngredientField()">Add another ingredient</a>
-            
           </div>
 
           <div class="form-group">
@@ -121,7 +136,8 @@
                 Cancel</a>
             </div>
             <div class="col-md-6">
-              <button type="submit" class="btn-lg btn-block btn-info float-right"> <span> <i class="icon fas fa-paper-plane mr-3"></i>
+              <button type="button" class="btn-lg btn-block btn-info float-right" onclick="uploadImage();"> <span> <i
+                    class="icon fas fa-paper-plane mr-3"></i>
                 </span> Submit</button>
             </div>
           </div>
