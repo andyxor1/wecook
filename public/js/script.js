@@ -127,6 +127,25 @@ $(document).ready(function () {
     }
   }
 
+  currentLocation = window.location.href.split("/")
+  if (currentLocation) {
+    currentLocation = currentLocation[currentLocation.length-1]
+    console.log("Current Location is: " )
+    console.log(currentLocation)
+  }
+
+  if(currentLocation && currentLocation === "b") { // if we are testing
+    var recipes = $(".recipe_preview_test");
+    for(var i = 0; i < recipes.length; i ++) {
+      recipes[i].addEventListener("click", function(e) {
+        console.log("clicked");
+        var id = $(this)[0].id
+        url = `/recipes/${id}/`
+        $.get(url);
+      });
+    }
+  }
+
   // $("#deleteRecipeConfirm").on("keyup", function(e) {
   //
   //   var valConfirm = $("#deleteRecipeConfirm").val().toString();
@@ -576,10 +595,12 @@ $(document).ready(function () {
   }
 
   //Click the recipe card to open modal
-  $("#recipe_result").on("click","div.card-body.p-2" , function() {
-       //console.log($(this).parent().next());
-      $(this).parent().next().modal()
-  })
+  if(currentLocation && currentLocation != "b") {
+    $("#recipe_result").on("click","div.card-body.p-2" , function() {
+         //console.log($(this).parent().next());
+        $(this).parent().next().modal()
+    })
+  }
 
 });
 

@@ -198,6 +198,22 @@ router.get('/dashboard', isLoggedIn, function (req, res, next) {
 
   });
 });
+//TODO: DELETE AFTER TESTING
+router.get('/dashboard/b', isLoggedIn, function (req, res, next) {
+
+  Recipe.find(function (err, recipes) {
+    if (err) { console.log(err); }
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
+    console.log(req.user);
+    console.log(req.body);
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
+    res.render('pages/dashboardB', {
+      recipe_seeds: recipes,
+      currentUser: req.user
+    });
+
+  });
+});
 
 router.get('/dashboard/community', function (req, res, next) {
 
@@ -208,6 +224,22 @@ router.get('/dashboard/community', function (req, res, next) {
     console.log(req.body);
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
     res.render('pages/dashboard', {
+      recipe_seeds: recipes,
+    });
+
+  });
+});
+
+//TODO: DELETE AFTER TESTING
+router.get('/dashboard/community/b', function (req, res, next) {
+
+  Recipe.find(function (err, recipes) {
+    if (err) { console.log(err); }
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
+    console.log(req.user);
+    console.log(req.body);
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
+    res.render('pages/dashboardB', {
       recipe_seeds: recipes,
     });
 
@@ -293,6 +325,23 @@ router.put("/recipe/:id", isLoggedIn, function( req, res) {
       res.redirect("back");
     } else {
       res.redirect("/account/" + req.user._id);
+    }
+
+  });
+});
+
+
+// for testing purposes to get recipes
+router.get("/recipes/:id", function( req, res) {
+  console.log("called in recipe get testing purpose route")
+  Recipe.findById(req.params.id, function(err, recipe){
+    if(err) {
+      console.log(err);
+      res.redirect("back");
+    } else {
+      res.render('pages/recipe_details', {
+        recipe_seeds: recipes,
+      });
     }
 
   });
